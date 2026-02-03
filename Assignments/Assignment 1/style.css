@@ -1,0 +1,16 @@
+body {
+    background-color: rgb(238, 172, 92);
+    margin: 8px;
+   padding: 10px; 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(27, 101, 165);
+}
+
+.intro {
+    border: rgb(27, 101, 165) solid 12px;
+    text-align: center;
+}
+p.intro {
+    font-style: italic;
+ 
+}
