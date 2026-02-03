@@ -15,14 +15,16 @@
     <a href="https://weather.com" target="blank">
       <strong>WEATHER PAGE</strong> <br />
     </a>
-    in a new tab, add "target = '_blank'"
+    in a new tab, add "target = '_blank'" <br />
 
     <!--  <div> -->
+    <h2>Here are my beasts, Timmo and LCK</h2>
     <img src="Timmo and LCK resize2.jpg" alt="Timmo and LCK" class="image" />
     <h4>Timmo and LCK Chillaxing</h4>
     <!-- </div> -->
-    <h2>Dog breeds and average weights</h2>
+
     <table class="dog-table">
+      <h2>Dog breeds and average weights</h2>
       <tr>
         <th>Breed</th>
         <th>Average Weight</th>
@@ -40,5 +42,31 @@
         <td>45-65 lbs</td>
       </tr>
     </table>
+    <form action="#" method="post">
+      <label>Name</label><input type="text" name="name" id="the_name" /><br />
+      <br />
+      Age<input type="number" />
+      <br />
+      Fav Dog Color (Pick One):
+      <input type="radio" name="color" value="golden" />Golden
+      <input type="radio" name="color" value="yellow" />Yellow
+      <input type="radio" name="color" value="brown" />Brown
+      <input type="radio" name="color" value="all" />All of them!
+      <br />
+      Fav Breed (Drop down list):
+      <select name="FavBreed">
+        <option value="golden">Golden</option>
+        <option value="beagle">Beagle</option>
+        <option value="lab">Lab</option>
+        <option value="all">All of them!</option>
+      </select>
+      <br />
+      Fav Doggo (Pick all that apply):
+      <input type="checkbox" name="chkGolden" value="golden" />Golden
+      <input type="checkbox" name="chkBeagle=" value="beagle" />Beagle
+      <input type="checkbox" name="chkGolden" value="lab" />Lab
+      <br />
+      <input type="button" value="Go!" />
+    </form>
   </body>
 </html>
