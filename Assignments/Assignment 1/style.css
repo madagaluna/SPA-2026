@@ -17,7 +17,7 @@ body {
     
 }
 
-.ed ul {
+.ed ol {
     font-style: italic;
 }
 
@@ -28,20 +28,27 @@ body {
 }
 
 .oops ul li:hover {
+    color: brown;
     opacity: 1;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
 }
 
 .food {
     background-color: rgb(234, 24, 28);
     border: rgb(7, 59, 105) solid 12px;
     text-align: center;
-    margin: 20px, 200px, 20px, 200px;  
+    margin:  20px;
+    
 }
 
 .love {
     background-color: rgb(98, 234, 24);
     border: rgb(7, 59, 105) solid 12px;
     text-align: center;
-    margin: 2000px, 200px, 20px, 200px;  
-    padding: 10px; 
+    margin: 20x;
 }
