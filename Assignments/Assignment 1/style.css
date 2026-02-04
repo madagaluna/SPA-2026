@@ -7,10 +7,41 @@ body {
 }
 
 .intro {
-    border: rgb(27, 101, 165) solid 12px;
+    background-color: rgb(234, 139, 24);
+    border: rgb(7, 59, 105) solid 12px;
     text-align: center;
 }
-p.intro {
+.intro p {
     font-style: italic;
- 
+    color: brown;
+    
+}
+
+.ed ul {
+    font-style: italic;
+}
+
+
+.oops ul li {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.oops ul li:hover {
+    opacity: 1;
+}
+
+.food {
+    background-color: rgb(234, 24, 28);
+    border: rgb(7, 59, 105) solid 12px;
+    text-align: center;
+    margin: 20px, 200px, 20px, 200px;  
+}
+
+.love {
+    background-color: rgb(98, 234, 24);
+    border: rgb(7, 59, 105) solid 12px;
+    text-align: center;
+    margin: 2000px, 200px, 20px, 200px;  
+    padding: 10px; 
 }
