@@ -9,17 +9,40 @@
       #mainFrame {
         background-color: rgb(240, 154, 42);
         width: 500px;
-        height: 700px;
+        height: 800px;
         border: 2px solid #333;
         margin: auto; /*centered the mainframe */
       }
 
       h1 {
-        background-color: rgb(240, 154, 42);
-        font-family: "Courier New", Courier, monospace;
+        text-decoration: none;
+        display: block;
+        border: 1px #333;
+        width: 350px;
+        text-transform: uppercase;
         color: blueviolet;
-        font-size: 50px;
+        font-weight: 600;
         text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 17px auto 5px auto;
+      }
+      .turn {
+        text-decoration: none;
+        display: block;
+        border: 1px #3545c5 solid;
+        width: 150px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 17px auto 5px auto;
+      }
+
+      .turn:hover {
+        background-color: #3545c5;
+        color: #fff;
       }
 
       #frame {
@@ -34,7 +57,7 @@
         background-color: rgb(159, 156, 152);
         color: blueviolet;
         font-size: 50px;
-        /*     text-align: center;  /* centers the box(es)  */
+        /*     text-align: center;  /* centers the box(es)  - actually ??? */
         width: 100px;
         height: 100px;
         border: 2px solid #333;
@@ -44,17 +67,57 @@
       .box:hover {
         background-color: bisque;
       }
+
+      a {
+        text-decoration: none;
+        display: block;
+        border: 1px #3545c5 solid;
+        width: 150px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 17px auto 5px auto;
+      }
+
+      a:hover {
+        background-color: #3545c5;
+        color: #fff;
+      }
+
+      input[type="button"] {
+        background-color: rgb(240, 154, 42);
+        text-decoration: none;
+        display: block;
+        border: 1px #3545c5 solid;
+        width: 150px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 17px auto 5px auto;
+      }
+
+      input[type="button"]:hover {
+        background-color: #3545c5;
+        color: #fff;
+      }
     </style>
   </head>
 
   <body>
     <div id="mainFrame">
       <h1>TIC TAC TOE</h1>
+      <br />
+      <div class="turn">0's Turn</div>
+      <br />
       <div id="frame">
         <div class="box">X</div>
         <div class="box">&nbsp;</div>
-        <!-- need &nbsp; so the boxes align inside frame div -->
-        <div class="box">X</div>
+        <!-- need &nbsp; so the boxes align inside frame div .. because it puts something in the box -->
+        <div class="box">0</div>
         <div class="box">&nbsp;</div>
         <div class="box">X</div>
         <div class="box">&nbsp;</div>
@@ -62,6 +125,10 @@
         <div class="box">&nbsp;</div>
         <div class="box">&nbsp;</div>
       </div>
+
+      <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank"
+        >Game Rules</a
+      >
       <input type="button" value="Play Tic Tac Toe!" />
     </div>
 
