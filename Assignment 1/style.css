@@ -1,0 +1,75 @@
+body {
+    background-color: rgb(238, 172, 92);
+    margin: 8px;
+   padding: 10px; 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(27, 101, 165);
+}
+
+.intro {
+    background-color: rgb(234, 139, 24);
+    border: rgb(7, 59, 105) solid 12px;
+    text-align: center;
+}
+.intro p {
+    font-style: italic;
+    color: brown;
+    
+}
+
+.ed ol {
+    font-style: italic;
+}
+
+/* invisible text*/
+.oops ul li {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+/* voila, visible text! */
+.oops ul li:hover {
+    color: brown;
+    opacity: 1;
+}
+ /* alows the horizontal display of .love and .food */
+.container{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.food, .love {
+      /* getting the two to be the same size regardless of vp */
+    
+    width: min(40vw, 260px);  
+    aspect-ratio: 1 / 1;
+    align-items: center;
+    justify-content: center;
+    border: rgb(7, 59, 105) solid 12px;
+    text-align: center;
+    margin:  20px;    
+}
+
+.food {
+    background-color: rgb(234, 24, 28);
+    color: rgb(207, 179, 21);
+}
+/* makes the text 2x html text in the anchor's >< */
+.food > a {
+    font-size: 2rem; /*em = relative to parent, rem= relative to page  */
+}
+
+.love {
+    background-color: rgb(66, 234, 24);  
+}
+
+.frame {  /* im not sure how to get this to fit correctly  */
+    height: 70%;
+    width: 90%;
+    margin: 20px;
+}
+ /* the image distorts when the vp is small - not sure how to adjust*/
+.frame img {
+    height: 100%;
+    width: 100%;
+}
