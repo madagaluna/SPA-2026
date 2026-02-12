@@ -6,38 +6,42 @@
     <!--@media (min-width:6900px) { /* styles go here for width up to 900px */ } -->
     <title>TIC TAC TOE</title>
     <style>
+      body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
       #mainFrame {
         background-color: rgb(240, 154, 42);
         width: 500px;
         height: 800px;
         border: 2px solid #333;
-        margin: auto; /*centered the mainframe */
+        margin: auto; /*centered the mainframe - it's fixed width */
       }
 
       h1 {
-        text-decoration: none;
         display: block;
-        border: 1px #333;
+        border: 1px dotted #333;
         width: 350px;
         text-transform: uppercase;
-        color: blueviolet;
+        color: #3545c5;
         font-weight: 600;
         text-align: center;
         padding: 15px 0 15px 0;
         box-sizing: border-box;
-        margin: 17px auto 5px auto;
+        margin: 25px auto 15px auto;
       }
       .turn {
         text-decoration: none;
         display: block;
-        border: 1px #3545c5 solid;
+        background-color: rgb(159, 156, 152);
+        color: #3545c5;
+        border: 1px solid #333;
         width: 150px;
         text-transform: uppercase;
         font-weight: 600;
         text-align: center;
         padding: 15px 0 15px 0;
         box-sizing: border-box;
-        margin: 17px auto 5px auto;
+        margin: 17px auto 15px auto;
       }
 
       .turn:hover {
@@ -46,39 +50,44 @@
       }
 
       #frame {
-        text-align: center; /*not centering on page */
         width: 350px;
         height: 350px;
+        text-align: center; /*centering the boxes and text */
         border: 2px solid #333;
-        margin: auto; /*centered the mainframe */
+        margin: auto; /*centered in the mainFrame */
+        box-sizing: border-box; /* maths margin */
       }
       .box {
         display: inline-block;
         background-color: rgb(159, 156, 152);
-        color: blueviolet;
+        line-height: 100px; /* works but feels hacky */
+        text-align: center; /*centering the boxes and text */
+        color: #3545c5;
         font-size: 50px;
-        /*     text-align: center;  /* centers the box(es)  - actually ??? */
         width: 100px;
         height: 100px;
         border: 2px solid #333;
-        box-sizing: border-box; /* tightens the borders by including padding and margin - puts the 5px margin in the box  */
+        box-sizing: border-box; /* tightens the borders by including padding and margin  */
         margin: 5px;
       }
       .box:hover {
-        background-color: bisque;
+        background-color: #3545c5;
+        color: white;
       }
 
       a {
         text-decoration: none;
         display: block;
-        border: 1px #3545c5 solid;
+        color: #3545c5;
+        background-color: rgb(159, 156, 152);
+        border: 1px solid #333;
         width: 150px;
         text-transform: uppercase;
         font-weight: 600;
         text-align: center;
         padding: 15px 0 15px 0;
         box-sizing: border-box;
-        margin: 17px auto 5px auto;
+        margin: 25px auto 15px auto;
       }
 
       a:hover {
@@ -87,17 +96,22 @@
       }
 
       input[type="button"] {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
         background-color: rgb(240, 154, 42);
         text-decoration: none;
         display: block;
-        border: 1px #3545c5 solid;
-        width: 150px;
+        background-color: rgb(159, 156, 152);
+        color: #3545c5;
+        border: 1px solid #333;
+        font-size: 25px;
+
+        width: 300px;
         text-transform: uppercase;
         font-weight: 600;
         text-align: center;
         padding: 15px 0 15px 0;
         box-sizing: border-box;
-        margin: 17px auto 5px auto;
+        margin: 25px auto 15px auto;
       }
 
       input[type="button"]:hover {
@@ -106,13 +120,10 @@
       }
     </style>
   </head>
-
   <body>
     <div id="mainFrame">
       <h1>TIC TAC TOE</h1>
-      <br />
       <div class="turn">0's Turn</div>
-      <br />
       <div id="frame">
         <div class="box">X</div>
         <div class="box">&nbsp;</div>
@@ -125,27 +136,10 @@
         <div class="box">&nbsp;</div>
         <div class="box">&nbsp;</div>
       </div>
-
       <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank"
         >Game Rules</a
       >
       <input type="button" value="Play Tic Tac Toe!" />
     </div>
-
-    <!--  NO JS, phew! <script> 
-        //   document.write("<ul>");
-        //    for (i = 0; i < 9; i++) {
-        //        document.write("<li>item" + (i + 1) + "</li>");
-        //    }
-        //     document.write("</ul>");
-        //     document.getElementByClass("result").innerHTML = "stuff";
-
-        document.write(div=class="box");
-        for (i = 0; i < 9; i++) {
-         document.write(i + 1);
-        }
-     //     document.write("</ul>");
-     //   document.getElementByID("result").innerHTML = "stuff";
-    </script> -->
   </body>
 </html>
