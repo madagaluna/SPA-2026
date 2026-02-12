@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
-    <!--@media (min-width:6900px) { /* styles go here for width up to 900px */ } -->
+    <!--@media (min-width:6900px) { /* styles go here for width up to 900px */ } not sure how to write, don't need -->
     <title>TIC TAC TOE</title>
     <style>
       body {
@@ -19,6 +19,7 @@
 
       h1 {
         display: block;
+        background-color: rgb(159, 156, 152);
         border: 1px dotted #333;
         width: 350px;
         text-transform: uppercase;
@@ -30,7 +31,6 @@
         margin: 25px auto 15px auto;
       }
       .turn {
-        text-decoration: none;
         display: block;
         background-color: rgb(159, 156, 152);
         color: #3545c5;
@@ -58,16 +58,16 @@
         box-sizing: border-box; /* maths margin */
       }
       .box {
-        display: inline-block;
+        display: inline-block; /* wraps the boxes */
         background-color: rgb(159, 156, 152);
-        line-height: 100px; /* works but feels hacky */
-        text-align: center; /*centering the boxes and text */
+        line-height: 100px; /* gives the text a height to be centered on */
+
         color: #3545c5;
         font-size: 50px;
         width: 100px;
         height: 100px;
         border: 2px solid #333;
-        box-sizing: border-box; /* tightens the borders by including padding and margin  */
+        box-sizing: border-box; /* tightens the borders by including padding and te  */
         margin: 5px;
       }
       .box:hover {
@@ -76,7 +76,7 @@
       }
 
       a {
-        text-decoration: none;
+        text-decoration: none; /* eliminates link underline */
         display: block;
         color: #3545c5;
         background-color: rgb(159, 156, 152);
