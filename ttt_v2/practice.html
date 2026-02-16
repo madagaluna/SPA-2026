@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
     <!--@media (min-width:6900px) { /* styles go here for width up to 900px */ } not sure how to write, don't need -->
     <title>Practice</title>
-    <!-- https://madagaluna.github.io/SPA-2026/TBD-->
+
     <style>
       body {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -55,14 +55,20 @@
               "fahrenheit is the same as " +
               ((ftemp - 32) * 5) / 9 +
               "&nbsp;" +
-              "degrees celsius" + "<br>"+"<br>",
+              "degrees celsius" +
+              "<br>" +
+              "<br>",
           );
         }
-      //  ftemp = prompt("Enter a temperature in Fahrenheit:");
-        
+        //  ftemp = prompt("Enter a temperature in Fahrenheit:");
+
         fahr2cels("100");
         fahr2cels(100.6);
         fahr2cels(20);
+        fahr2cels("twenty"); //gives NaN
+        fahr2cels(twelve); //breaks  - doesn't show anything and doesn't show (32) either
+        fahr2cels(32); //doesn't show
+
         ftemp = parseInt(ftemp);
       </script>
     </div>
