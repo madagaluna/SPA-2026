@@ -14,7 +14,7 @@
       #mainFrame {
         text-align: center;
         background-color: rgb(240, 154, 42);
-        color: blue;
+        color: rgb(63, 47, 3);
         width: 500px;
         height: 800px;
         border: 2px solid #333;
@@ -29,15 +29,35 @@
       <!-- ask for a number using prompt, then will write the times table for that
       number up to 12. (use a loop and document.write) -->
       <script>
-            prompt("Enter a number to see its times table: ");
-            num = prompt("Enter a number to see its times table: ");
-            function timesTable(num) {
-            for (i = 1; i <= 12; i++) {
-              document.write(num + " x " + i + " = " + num * i + "<br>");
-              console.log(num + " x " + i + " = " + num * i);
-              function (num)
-            }
+        function timesTable(num) {
+          //first name and define the function
+          for (i = 1; i <= 12; i++) {
+            document.write(num + " x " + i + " = " + num * i + "<br>");
+            console.log(num + " x " + i + " = " + num * i);
+          }
         }
+        y = prompt("Enter a number");
+        y = parseInt(y); //doesn't change output if it's a string/letter but will change a decimal to a whole number or "4" to 4
+
+        timesTable(y); //call the function - can use a different variable name here, just need to be the same as the one defined in the function
+      </script>
+
+      <h2>Times Table</h2>
+
+      <!-- ask for a number using prompt, then will write the times table for that
+      number up to 12. (use a loop and document.write) -->
+      <script>
+        function fahr2cels(ftemp) {
+          //first name and define the function
+          for (i = 1; i <= 12; i++) {
+            document.write(num + " x " + i + " = " + num * i + "<br>");
+            console.log(num + " x " + i + " = " + num * i);
+          }
+        }
+        y = prompt("Enter a number");
+        y = parseInt(y); //doesn't change output if it's a string/letter but will change a decimal to a whole number or "4" to 4
+
+        timesTable(y); //call the function - can use a different variable name here, just need to be the same as the one defined in the function
       </script>
     </div>
   </body>
