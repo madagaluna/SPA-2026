@@ -53,21 +53,25 @@
       #frame {
         width: 350px;
         height: 350px;
-        text-align: center; /*centering the boxes and text in frame/ boxes (child)*/
+        /* text-align: center; centering the boxes and text in frame/ boxes (child)*/
         border: 2px solid #333;
         margin: auto; /*centered in the mainFrame */
         box-sizing: border-box; /* maths padding, etc */
+        font-size: 0px;
       }
       .square {
+        /* nee box */
         display: inline-block; /* wraps the boxes bases on frame width */
         background-color: rgb(159, 156, 152);
         line-height: 100px; /* gives the text a height to be centered on */
+        text-align: center; /*keeps x and 0's in the center, not on the left */
+        vertical-align: top; /* keeps the squares horizontally ? alligned - aligned to the top */
         color: #3545c5;
         font-size: 50px;
         width: 100px;
         height: 100px;
-        border: 2px solid #333;
-        box-sizing: border-box; /* tightens the borders by including padding and te  */
+        border: 1px solid #333;
+        box-sizing: border-box; /* tightens the borders by including padding and te xt */
         margin: 5px;
       }
       .square:hover {
@@ -124,15 +128,16 @@
     <div id="mainFrame">
       <!-- largest retangle, parent (figuring out what I need to rename in css) -->
       <h1>TIC TAC TOE</h1>
-      <div class="turn">0's Turn</div>
+      <div class="turn">O's Turn</div>
       <div id="frame">
         <!-- frame that sets width for boxes nee squares) -->
         <script>
           const NUM_SQUARES = 9; // <!-- sets # of squares to write then creates the squares) -->
           for (i = 0; i < NUM_SQUARES; i++) {
-            id = "sq" + i;
+            id = "sq" + i; // created id's for each square
             document.write("<div class='square' id='" + id + "'></div>");
           }
+
           for (i = 0; i < 0; i++) {
             //puts the squares on the browser page)
             square = document.getElementById("sq" + i);
@@ -140,7 +145,7 @@
         </script>
         <script>
           document.getElementById("sq1").innerHTML = "X";
-          document.getElementById("sq3").innerHTML = "0";
+          document.getElementById("sq3").innerHTML = "O";
           document.getElementById("sq5").innerHTML = "X";
         </script>
       </div>
