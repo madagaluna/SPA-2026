@@ -25,10 +25,9 @@
   <body>
     <div id="mainFrame">
       <h2>Times Table</h2>
-
       <!-- ask for a number using prompt, then will write the times table for that
       number up to 12. (use a loop and document.write) -->
-      <script>
+      <!--   <script>
         function timesTable(num) {
           //first name and define the function
           for (i = 1; i <= 12; i++) {
@@ -40,24 +39,23 @@
         y = parseInt(y); //doesn't change output if it's a string/letter but will change a decimal to a whole number or "4" to 4
 
         timesTable(y); //call the function - can use a different variable name here, just need to be the same as the one defined in the function
-      </script>
+      </script> -->
 
-      <h2>Times Table</h2>
+      <h2>Temperature Converter</h2>
 
       <!-- ask for a number using prompt, then will write the times table for that
       number up to 12. (use a loop and document.write) -->
       <script>
-        function fahr2cels(ftemp) {
-          //first name and define the function
-          for (i = 1; i <= 12; i++) {
-            document.write(num + " x " + i + " = " + num * i + "<br>");
-            console.log(num + " x " + i + " = " + num * i);
-          }
-        }
-        y = prompt("Enter a number");
-        y = parseInt(y); //doesn't change output if it's a string/letter but will change a decimal to a whole number or "4" to 4
+        ftemp =  document.write("Enter a temperature in Fahrenheit:");
+                   ftemp = parseInt(ctemp);
+               function fahr2cels(ftemp) {
+                 //Temperature in degrees Fahrenheit (°F) = (Temperature in degrees Celsius (°C) * 9/5) + 32
 
-        timesTable(y); //call the function - can use a different variable name here, just need to be the same as the one defined in the function
+
+                   document.write(ftemp + <br> "fahrenheit is the same as " + (ftemp - 32) * 5/9 + "<br>" + "degrees celsius");
+
+                 }
+                 fahr2cels(ftemp)
       </script>
     </div>
   </body>
