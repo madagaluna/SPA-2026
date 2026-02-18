@@ -64,7 +64,7 @@
             // this one: (Temperature in degrees Fahrenheit (°F) - 32) * 5/9
 
             document.write(
-              ftemp +
+              parseInt(ftemp) +
                 "&nbsp;" +
                 "fahrenheit is the same as " +
                 parseInt((ftemp - 32) * (5 / 9)) +
@@ -84,7 +84,6 @@
           fahr2cels(twelve); //breaks  - doesn't show anything and doesn't show (32) either
           fahr2cels(32); //doesn't show if I leave 12
 
-          ftemp = parseInt(ftemp);
         </script>
       </div>
     </div>
