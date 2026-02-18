@@ -20,6 +20,18 @@
         border: 2px solid #333;
         margin: auto; /*centered the mainframe - it's fixed width */
       }
+      .conversion {
+        background-color: rgb(179, 165, 152);
+        color: #333;
+        border: 1px solid #333;
+        width: 580px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 50px auto auto auto;
+      }
     </style>
   </head>
   <body>
@@ -41,36 +53,41 @@
         timesTable(y); //call the function - can use a different variable name here, just need to be the same as the one defined in the function
       </script>
 
-      <h2>Temperature Conversion</h2>
+      <div class="conversion">
+        <h2>Temperature Conversion</h2>
 
-      <!-- ask for a number using prompt, then will write the times table for that
+        <!-- ask for a number using prompt, then will write the times table for that
       number up to 12. (use a loop and document.write) -->
-      <script>
-        function fahr2cels(ftemp) {
-          //Temperature in degrees Fahrenheit (°F) = (Temperature in degrees Celsius (°C) * 9/5) + 32
 
-          document.write(
-            ftemp +
-              "&nbsp;" +
-              "fahrenheit is the same as " +
-              ((ftemp - 32) * 5) / 9 +
-              "&nbsp;" +
-              "degrees celsius" +
-              "<br>" +
-              "<br>",
-          );
-        }
-        //  ftemp = prompt("Enter a temperature in Fahrenheit:");
+        <script>
+          function fahr2cels(ftemp) {
+            //Temperature in degrees Fahrenheit (°F) = (Temperature in degrees Celsius (°C) * 9/5) + 32
+            // this one: (Temperature in degrees Fahrenheit (°F) - 32) * 5/9
 
-        fahr2cels("100");
-        fahr2cels(100.6);
-        fahr2cels(20);
-        fahr2cels("twenty"); //gives NaN
-        fahr2cels(twelve); //breaks  - doesn't show anything and doesn't show (32) either
-        fahr2cels(32); //doesn't show
+            document.write(
+              ftemp +
+                "&nbsp;" +
+                "fahrenheit is the same as " +
+                parseInt((ftemp - 32) * (5 / 9)) +
+                "&nbsp;" +
+                "degrees celsius" +
+                "<br>" +
+                "<br>",
+            );
+          }
+          //  ftemp = prompt("Enter a temperature in Fahrenheit:");
 
-        ftemp = parseInt(ftemp);
-      </script>
+          fahr2cels("100");
+          fahr2cels(100.6);
+          fahr2cels(20);
+          fahr2cels("twenty");
+          fahr2cels(32); 
+          fahr2cels(twelve); //breaks  - doesn't show anything and doesn't show (32) either
+          fahr2cels(32); //doesn't show if I leave 12
+
+          ftemp = parseInt(ftemp);
+        </script>
+      </div>
     </div>
   </body>
 </html>
