@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
-    <!--@media (min-width:6900px) { /* styles go here for width up to 900px */ } not sure how to write, don't need -->
+
     <title>Practice</title>
 
     <style>
@@ -16,7 +16,7 @@
       }
       #mainFrame {
         text-align: center;
-        background-color: rgb(240, 154, 42); 
+        background-color: rgb(240, 154, 42);
         width: 600px;
         height: 800px;
         border: 2px solid #333;
@@ -31,6 +31,8 @@
         box-sizing: border-box;
         margin: 50px auto auto auto;
       }
+
+      /*-@media (max-width:600px) { /* styles go here e.g. .conversion {background-color: rgb(100,100,100) } */
     </style>
   </head>
   <body>
@@ -77,13 +79,12 @@
           //  ftemp = prompt("Enter a temperature in Fahrenheit:");
 
           fahr2cels("100");
-          fahr2cels(100.6);//interesting.  It calculated 100.6 but it didn't round up to 101
+          fahr2cels(100.6); //interesting.  It calculated 100.6 but it didn't round up to 101
           fahr2cels(20);
           fahr2cels("twenty");
-          fahr2cels(32); 
+          fahr2cels(32);
           fahr2cels(twelve); //breaks  - doesn't show anything and doesn't show (32) either
           fahr2cels(32); //doesn't show if I leave 12
-
         </script>
       </div>
     </div>
