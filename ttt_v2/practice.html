@@ -67,13 +67,50 @@
             return (ftemp - 32) * (5 / 9); //return here!  Late :()
           }
           //  ftemp = prompt("Enter a temperature in Fahrenheit:");
+          // changes made after grading for my own benefit.
+          let f = 100;
+          let c = fahr2cels(f);
+          document.write(
+            f +
+              " degrees fahrenheit is the same as " +
+              parseInt(c) +
+              " degrees celsius" +
+              "<br>" +
+              "<br>",
+          );
 
-          document.write(fahr2cels(100) + "<br>"); //interesting - it calculated 100 but it didn't round up to 38.
-          document.write(fahr2cels(212) + "<br>"); //  It just left it as 37.77777777777778
+          f = 0;
+          c = fahr2cels(f);
+          document.write(
+            f +
+              " degrees fahrenheit is the same as " +
+              parseInt(c) +
+              " degrees celsius" +
+              "<br>" +
+              "<br>",
+          );
+
+          f = 32;
+          c = fahr2cels(f);
+          document.write(
+            f +
+              " degrees fahrenheit is the same as " +
+              parseInt(c) +
+              " degrees celsius" +
+              "<br>",
+          );
+
+          //interesting - it calculated 100 but it didn't round up to 38.
+          //  c = fahr2cels(32);
+          // document.write(parseInt(c) + " degrees fahrenheit" + "<br>");
+          // c = fahr2cels(212);
+          //  document.write(parseInt(c) + "<br>");
+
+          //      document.write(fahr2cels(212) + "<br>"); //  It just left it as 37.77777777777778
           //  fahr2cels(100.6);//interesting.  It calculated 100.6 but it didn't round up to 101
           // fahr2cels(20);
           //    fahr2cels("twenty");
-          document.write(fahr2cels(32));
+          //      document.write(fahr2cels(32));
           //    fahr2cels(twelve); //breaks  - doesn't show anything and doesn't show (32) either
           //    fahr2cels(32); //doesn't show if I leave 12
         </script>
