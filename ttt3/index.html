@@ -136,20 +136,29 @@
           // use window.onload
 
           const NUM_SQUARES = 9; // <!-- sets # of squares to write then creates the squares) -->
+
           for (i = 0; i < NUM_SQUARES; i++) {
             id = "sq" + i; // created id's for each square
-            document.write("<div class='square' id='" + id + "'></div>");
+            document.write("<div class='square' id='" + id + "'></div>"); //puts the squares on the browser page)
           }
-
-          for (i = 0; i < 0; i++) {
-            //puts the squares on the browser page)
-            square = document.getElementById("sq" + i);
-          }
+          //   };
         </script>
         <script>
-          document.getElementById("sq1").innerHTML = "X";
-          document.getElementById("sq3").innerHTML = "O";
-          document.getElementById("sq5").innerHTML = "X";
+          window.onload = function () {
+            var squares = document.querySelectorAll(".square");
+            for (i = 0; i < NUM_SQUARES; i++) {
+              squares[i].onclick = squareHandler;
+            }
+          };
+
+          function squareHandler() {
+            // result = document.getElementById("result");
+            theClass = this.className;
+            index = theClass.indexOf("btn") + 3;
+            number = parseInt(theClass.substring(index));
+            result.innerHTML =
+              "class is: " + this.className + "<br />Number is: " + number;
+          }
         </script>
       </div>
       <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank"
@@ -159,3 +168,35 @@
     </div>
   </body>
 </html>
+
+<!--<script>
+ // {
+ //   for (i = 1; i <= 3; i++)
+ //     document.querySelector(".btn" + i).onclick = buttonHandler;
+ // } // end window onload
+
+ // function buttonHandler() {
+    result = document.getElementById("result");
+    theClass = this.className;
+    index = theClass.indexOf("btn") + 3;
+    number = parseInt(theClass.substring(index));
+    result.innerHTML =
+      "class is: " + this.className + "<br />Number is: " + number;
+  }
+//</script>
+
+   window.onload= function() 
+   {
+        btns = document.querySelectorAll(".theButton")
+        for (i=0; i<btns.length; i++) 
+            btns[i].onclick= buttonHandler;
+   } // end window onload
+
+   function buttonHandler()
+    {
+        result = document.getElementById("result");
+        theClass = this.className;
+        index = theClass.indexOf("btn")+3;
+        number = parseInt(theClass.substring(index));  
+        result.innerHTML = "class is: " + this.className + "<br />Number is: " + number;
+    }-->
