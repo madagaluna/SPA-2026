@@ -71,11 +71,13 @@
         width: 100px;
         height: 100px;
         border: 1px solid #333;
+
         box-sizing: border-box; /* tightens the borders by including padding and te xt */
         margin: 5px;
       }
       .square:hover {
         background-color: #3545c5;
+
         color: white;
       }
 
@@ -128,44 +130,38 @@
     <div id="mainFrame">
       <!-- largest retangle, parent (figuring out what I need to rename in css) -->
       <h1>TIC TAC TOE</h1>
-      <div class="turn">O's Turn</div>
+      <div class="turn">Turn</div>
       <div id="frame">
         <!-- frame that sets width for boxes nee squares) -->
         <script>
-          // create an event handler for the div that reps the squares onclick and this and popup and innerhtml
-          // use window.onload
-
           const NUM_SQUARES = 9; // <!-- sets # of squares to write then creates the squares) -->
 
           for (i = 0; i < NUM_SQUARES; i++) {
             id = "sq" + i; // created id's for each square
             document.write("<div class='square' id='" + id + "'></div>"); //puts the squares on the browser page)
           }
-          //   };
-        </script>
-        <script>
-          window.onload = function () {
-            var squares = document.querySelectorAll(".square");
-            for (i = 0; i < squares.length; i++) {
-              squares[i].onclick = squareHandler;
-            }
-          };
-
-          function squareHandler() {
-            this.innerhtml = "X"; // put X in square clicked
-            var id = this.id; // get the sq #
-            var number = parseInt(id.substring(2)); // gets rid of "sq" and leaves index, parseInt turns it into a number
-            alert(number); //popup
-            // result = document.getElementById("result");  // this will probably used for turn.
-            // theClass = this.className; // this is the square that was clicked on, and the class name is "square"
-            //   index = theClass.indexOf("btn") + 3;
-
-            //  number = parseInt(theClass.substring(index)); // this will probably be used to track clicks
-            //   result.innerHTML =
-            //   "class is: " + this.className + "<br />Number is: " + number; // this will probably be used to put x and o in the squares
-          }
         </script>
       </div>
+      <script>
+        window.onload = function () {
+          // squares exist ^
+          var squares = document.querySelectorAll(".square");
+          for (var i = 0; i < squares.length; i++) {
+            squares[i].onclick = squareHandler;
+          }
+        };
+
+        function squareHandler() {
+          this.innerhtml = "X"; // put X in square clicked - it should but... this = clicked i in squares[i].onclick = squareHandler;
+          // var id = this.id; // get the sq #
+          //  alert("clicked" + this.id);
+          console.log(id);
+          console.log(this);
+          var number = parseInt(id.substring(2)); // gets rid of "sq" and leaves index, parseInt turns it into a number
+          // alert(number); //popup
+        }
+      </script>
+      <!--  </div> -->
       <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank"
         >Game Rules</a
       >
@@ -173,35 +169,3 @@
     </div>
   </body>
 </html>
-
-<!--<script>
- // {
- //   for (i = 1; i <= 3; i++)
- //     document.querySelector(".btn" + i).onclick = buttonHandler;
- // } // end window onload
-
- // function buttonHandler() {
-    result = document.getElementById("result");
-    theClass = this.className;
-    index = theClass.indexOf("btn") + 3;
-    number = parseInt(theClass.substring(index));
-    result.innerHTML =
-      "class is: " + this.className + "<br />Number is: " + number;
-  }
-//</script>
-
-   window.onload= function() 
-   {
-        btns = document.querySelectorAll(".theButton")
-        for (i=0; i<btns.length; i++) 
-            btns[i].onclick= buttonHandler;
-   } // end window onload
-
-   function buttonHandler()
-    {
-        result = document.getElementById("result");
-        theClass = this.className;
-        index = theClass.indexOf("btn")+3;
-        number = parseInt(theClass.substring(index));  
-        result.innerHTML = "class is: " + this.className + "<br />Number is: " + number;
-    }-->
