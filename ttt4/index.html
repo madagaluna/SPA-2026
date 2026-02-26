@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
+    <!--@media (min-width:6900px) { /* styles go here for width up to 900px */ } not sure how to write, don't need -->
+    <title>TIC TAC TOE</title>
+    <!-- https://madagaluna.github.io/SPA-2026/ttt_v2-->
+    <style>
+      body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      #mainFrame {
+        background-color: rgb(240, 154, 42);
+        width: 500px;
+        height: 800px;
+        border: 2px solid #333;
+        margin: auto; /*centered the mainframe - it's fixed width */
+      }
+
+      h1 {
+        display: block;
+        background-color: rgb(159, 156, 152);
+        border: 1px dotted #333;
+        width: 350px;
+        text-transform: uppercase;
+        color: #333;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 25px auto 15px auto;
+      }
+      .turn {
+        display: block;
+        background-color: rgb(159, 156, 152);
+        color: #333;
+        border: 1px solid #333;
+        width: 150px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 17px auto 15px auto;
+      }
+
+      .turn:hover {
+        background-color: #3545c5;
+        color: #fff;
+      }
+
+      #frame {
+        width: 350px;
+        height: 350px;
+        /* text-align: center; centering the boxes and text in frame/ boxes (child)*/
+        border: 2px solid #333;
+        margin: auto; /*centered in the mainFrame */
+        box-sizing: border-box; /* maths padding, etc */
+        font-size: 0px;
+      }
+      .square {
+        /* nee box */
+        display: inline-block; /* wraps the boxes bases on frame width */
+        background-color: rgb(159, 156, 152);
+        line-height: 100px; /* gives the text a height to be centered on */
+        text-align: center; /*keeps x and 0's in the center, not on the left */
+        vertical-align: top; /* keeps the squares horizontally ? alligned - aligned to the top */
+        color: #333;
+        font-size: 50px;
+        width: 100px;
+        height: 100px;
+        border: 1px solid #333;
+
+        box-sizing: border-box; /* tightens the borders by including padding and te xt */
+        margin: 5px;
+      }
+      .square:hover {
+        background-color: #3545c5;
+
+        color: white;
+      }
+
+      a {
+        text-decoration: none; /* eliminates link underline */
+        display: block;
+        color: #333;
+        background-color: rgb(159, 156, 152);
+        border: 1px solid #333;
+        width: 150px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 25px auto 15px auto;
+      }
+
+      a:hover {
+        background-color: #3545c5;
+        color: #fff;
+      }
+
+      input[type="button"] {
+        font-family:
+          Verdana, Geneva, Tahoma, sans-serif; /* had to add the font family again - odd  */
+        background-color: rgb(240, 154, 42);
+        text-decoration: none;
+        display: block;
+        background-color: rgb(159, 156, 152);
+        color: #333;
+        border: 1px solid #333;
+        font-size: 25px;
+        width: 300px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 25px auto 15px auto;
+      }
+
+      input[type="button"]:hover {
+        background-color: #3545c5;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mainFrame">
+      <h1>TIC TAC TOE</h1>
+      <div class="turn">Turn</div>
+      <div id="frame">
+        <script>
+          const NUM_SQUARES = 9; //
+          for (var i = 0; i < NUM_SQUARES; i++) {
+            var id = "sq" + i; // created id's for each square in the form of sq[]
+            document.write("<div class='square' id='" + id + "'></div>"); //puts the squares on the browser page)
+          }
+        </script>
+      </div>
+      <script>
+        window.onload = function () {
+          var turn = math.random() < 0.5 ? "X" : "0";
+          va
+          var squares = document.querySelectorAll(".square"); // makes an array of all the sq[]
+          for (var i = 0; i < squares.length; i++) {
+            squares[i].onclick = squareHandler; // when clicked, runs handler
+          }
+        };
+
+        function squareHandler() {
+          this.innerHTML = "X"; // put X in sq[] clicked this instance
+          var num = parseInt(this.id.substring(2)); // gets rid of "sq" and leaves index, parseInt turns it into a number
+          var turn
+        }
+      </script>
+      <!--  </div> -->
+      <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank"
+        >Game Rules</a
+      >
+      <input type="button" value="Play Tic Tac Toe!" />
+    </div>
+  </body>
+</html>
+
+
+ <!-- •	Alternate between X’s turn or O’s turn.  Put the appropriate symbol (X or O) in the square when clicked.  
+•	Display whose turn it is in the div created previously.
+•	A square should not be allowed to be changed once an X or O is placed.
+•	Randomly choose whether X or O will start.
+•	Remove the popup you had in part 3
+
+
+/* random numbers 1-6 */
+      for (n = 1; n <= 6; n++) {
+        r = Math.round(Math.random() * 5 + 1);
+        document.write(r + " ");
+      }
+
+
+      
+      document.write(odd ? x + " is odd" : x + " is even");
+      document.write("<br />");
