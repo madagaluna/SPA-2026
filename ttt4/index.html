@@ -140,19 +140,29 @@
         </script>
       </div>
       <script>
+
+        var turn; // current player
+        var turnDisplay; // the display of player whose turn it is
+
         window.onload = function () {
-          var turn = math.random() < 0.5 ? "X" : "0";
-          va
-          var squares = document.querySelectorAll(".square"); // makes an array of all the sq[]
+        turnDisplay = document.querySelector(".turn");  // grabs class - turn div - for displaying player turn
+         turn = Math.random() < 0.45 ? "X" : "O";  // random start - not quite 50 50 chance cuz random goes to .9 - I'm guessing this, not sure
+          turnDisplay.innerHTML = turn + " turn";  //displays player
+          var squares = document.querySelectorAll(".square"); // makes an array of all the sq[]  / makes the board
           for (var i = 0; i < squares.length; i++) {
             squares[i].onclick = squareHandler; // when clicked, runs handler
           }
         };
 
         function squareHandler() {
-          this.innerHTML = "X"; // put X in sq[] clicked this instance
-          var num = parseInt(this.id.substring(2)); // gets rid of "sq" and leaves index, parseInt turns it into a number
-          var turn
+          if (this.innerHTML == "X" || this.innerHTML == "O") {  //prevents overwriting if the square has an x || an o - glad I messed up "return" last week
+            return;
+          }
+        this.innerHTML = turn;  //marks the square with x or o
+       //  alert(turn);
+         turn = (turn == "X") ? "O" : "X"; // switches turn
+         turnDisplay.innerHTML = turn + " turn";
+       //  alert(turn);
         }
       </script>
       <!--  </div> -->
@@ -166,19 +176,19 @@
 
 
  <!-- •	Alternate between X’s turn or O’s turn.  Put the appropriate symbol (X or O) in the square when clicked.  
-•	Display whose turn it is in the div created previously.
-•	A square should not be allowed to be changed once an X or O is placed.
-•	Randomly choose whether X or O will start.
-•	Remove the popup you had in part 3
+•//	Display whose turn it is in the div created previously.
+•//	A square should not be allowed to be changed once an X or O is placed.
+•//	Randomly choose whether X or O will start.
+//•	Remove the popup you had in part 3
 
 
 /* random numbers 1-6 */
-      for (n = 1; n <= 6; n++) {
-        r = Math.round(Math.random() * 5 + 1);
-        document.write(r + " ");
-      }
+   //   for (n = 1; n <= 6; n++) {
+   //     r = Math.round(Math.random() * 5 + 1);
+   //     document.write(r + " ");
+  //   }
 
 
       
-      document.write(odd ? x + " is odd" : x + " is even");
-      document.write("<br />");
+  //    document.write(odd ? x + " is odd" : x + " is even");
+  //    document.write("<br />");
