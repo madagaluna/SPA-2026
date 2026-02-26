@@ -137,7 +137,7 @@
           const NUM_SQUARES = 9; // <!-- sets # of squares to write then creates the squares) -->
 
           for (i = 0; i < NUM_SQUARES; i++) {
-            id = "sq" + i; // created id's for each square
+            id = "sq" + i; // created id's for each square in the form of sq[]
             document.write("<div class='square' id='" + id + "'></div>"); //puts the squares on the browser page)
           }
         </script>
@@ -145,17 +145,17 @@
       <script>
         window.onload = function () {
           // squares exist ^
-          var squares = document.querySelectorAll(".square");
+          var squares = document.querySelectorAll(".square"); // makes an array of all the squares
           for (var i = 0; i < squares.length; i++) {
-            squares[i].onclick = squareHandler;
+            squares[i].onclick = squareHandler; // when clicked, runs handler
           }
         };
 
         function squareHandler() {
-          this.innerhtml = "X"; // put X in square clicked - it should but... this = clicked i in squares[i].onclick = squareHandler;
+          this.innerHTML = "X"; // put X in square clicked - it should but... this = clicked i in squares[i].onclick = squareHandler;
           // var id = this.id; // get the sq #
           //  alert("clicked" + this.id);
-          console.log(id);
+          console.log(this.id);
           console.log(this);
           var number = parseInt(id.substring(2)); // gets rid of "sq" and leaves index, parseInt turns it into a number
           // alert(number); //popup
