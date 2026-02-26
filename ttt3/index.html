@@ -145,23 +145,18 @@
       <script>
         window.onload = function () {
           // squares exist ^
-          var squares = document.querySelectorAll(".square"); // makes an array of all the squares
+          var squares = document.querySelectorAll(".square"); // makes an array of all the sq[]
           for (var i = 0; i < squares.length; i++) {
             squares[i].onclick = squareHandler; // when clicked, runs handler
           }
         };
 
         function squareHandler() {
-          this.innerHTML = "X"; // put X in square clicked - it should but... this = clicked i in squares[i].onclick = squareHandler;
-          // var id = this.id; // get the sq #
-          //  alert("clicked" + this.id);
-          console.log(this.id);
-          console.log(this);
-          var number = parseInt(id.substring(2)); // gets rid of "sq" and leaves index, parseInt turns it into a number
-          // alert(number); //popup
+          this.innerHTML = "X"; // put X in sq[] clicked this instance
+          var number = parseInt(id.substring(2)); // parseInt turns it into a number gets rid of "sq" (substring(2)) and assigns index to number,
+          alert("You clicked on " + number); //popup
         }
       </script>
-      <!--  </div> -->
       <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank"
         >Game Rules</a
       >
