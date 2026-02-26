@@ -146,18 +146,23 @@
         <script>
           window.onload = function () {
             var squares = document.querySelectorAll(".square");
-            for (i = 0; i < NUM_SQUARES; i++) {
+            for (i = 0; i < squares.length; i++) {
               squares[i].onclick = squareHandler;
             }
           };
 
           function squareHandler() {
-            // result = document.getElementById("result");
-            theClass = this.className;
-            index = theClass.indexOf("btn") + 3;
-            number = parseInt(theClass.substring(index));
-            result.innerHTML =
-              "class is: " + this.className + "<br />Number is: " + number;
+            this.innerhtml = "X"; // put X in square clicked
+            var id = this.id; // get the sq #
+            var number = parseInt(id.substring(2)); // gets rid of "sq" and leaves index, parseInt turns it into a number
+            alert(number); //popup
+            // result = document.getElementById("result");  // this will probably used for turn.
+            // theClass = this.className; // this is the square that was clicked on, and the class name is "square"
+            //   index = theClass.indexOf("btn") + 3;
+
+            //  number = parseInt(theClass.substring(index)); // this will probably be used to track clicks
+            //   result.innerHTML =
+            //   "class is: " + this.className + "<br />Number is: " + number; // this will probably be used to put x and o in the squares
           }
         </script>
       </div>
