@@ -29,9 +29,10 @@
         text-align: center;
         padding: 15px 0 15px 0;
         box-sizing: border-box;
-        margin: 25px auto 15px auto;
+        margin: 50px auto 15px auto;
       }
       .turn {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
         display: block;
         background-color: rgb(159, 156, 152);
         color: #333;
@@ -51,13 +52,13 @@
       }
 
       #frame {
-        width: 350px;
-        height: 350px;
+        width: 335px;
+        height: 335px; /* gotcha, fits right now - the 5px margin messed me up
         /* text-align: center; centering the boxes and text in frame/ boxes (child)*/
-        border: 2px solid #333;
+        border: 2px solid #868585;
         margin: auto; /*centered in the mainFrame */
         box-sizing: border-box; /* maths padding, etc */
-        font-size: 0px;
+        font-size: 0; /* don't need px with zero - don't need any unit for zero */
       }
       .square {
         /* nee box */
@@ -70,14 +71,12 @@
         font-size: 50px;
         width: 100px;
         height: 100px;
-        border: 1px solid #333;
-
+        border: 2px solid #868585;
         box-sizing: border-box; /* tightens the borders by including padding and te xt */
         margin: 5px;
       }
       .square:hover {
         background-color: #3545c5;
-
         color: white;
       }
 
@@ -102,18 +101,17 @@
       }
 
       input[type="button"] {
-        font-family:
-          Verdana, Geneva, Tahoma, sans-serif; /* had to add the font family again - odd  */
+        font-family: cursive;
         background-color: rgb(240, 154, 42);
         text-decoration: none;
         display: block;
         background-color: rgb(159, 156, 152);
-        color: #333;
+        color: #3545c5;
         border: 1px solid #333;
         font-size: 25px;
         width: 300px;
         text-transform: uppercase;
-        font-weight: 600;
+        font-weight: 1000;
         text-align: center;
         padding: 15px 0 15px 0;
         box-sizing: border-box;
@@ -124,6 +122,9 @@
         background-color: #3545c5;
         color: #fff;
       }
+      .win {
+        background-color: hotpink; /* get to work */
+      }
     </style>
   </head>
   <body>
@@ -132,71 +133,101 @@
       <div class="turn">Turn</div>
       <div id="frame">
         <script>
-          // ********************* VARIABLES WITH STATE
           const NUM_SQUARES = 9; //
           for (var i = 0; i < NUM_SQUARES; i++) {
             var id = "sq" + i; // created id's for each square in the form of sq[]
             document.write("<div class='square' id='" + id + "'></div>"); //puts the squares on the browser page)
-            var turn; // current player
-            // const endGame; // true/false - use if truthy - string
-            var turnDisplay; // the display of player whose turn it is
-            //startBtn; // start the game id #
           }
         </script>
       </div>
       <script>
-        //
+        // *********************  Set up VARIABLES WITH STATE - on / off true false
+        var squares; // list of the 9 sq <div>s
+        var turn; // current player
+        var turnDisplay; // the display of player whose turn it is
+        //var startBtn; // start the game id # needed her?
+        var endGame = false; // true/false -  if = truthy
+
+        // ********************* onload
         window.onload = function () {
           squares = document.querySelectorAll(".square"); // makes an array of all the sq[]  / makes the board
           for (var i = 0; i < squares.length; i++) {
-            squares[i].onclick = squareHandler; // when clicked, runs handler
+            squares[i].onclick = squareHandler; // when clicked, runs handler - it is attached to each square
           }
 
           turnDisplay = document.querySelector(".turn"); // grabs class - turn div - for displaying player turn
-
-          // startBtn;
-
-          turn = Math.random() < 0.5 ? "X" : "O"; // random start
-          //endGame here
-
-          turnDisplay.innerHTML = turn + "'s turn"; //displays player
-
-          //startBtn = start the game
+          startBtn = document.getElementById("startBtn"); //.onclick = startGame;
+          startBtn.onclick = startGame; // // attach click handler to the strtbtn, resets the game in handler
+          startGame(); // without get undefined first time
         };
 
+        // ********************* functions
+        function startGame() {
+          //sets/resets the game
+          endGame = false; // game isn't over
+          for (var i = 0; i < squares.length; i++) {
+            squares[i].innerHTML = ""; // clears board, all sq have ""
+          }
+          turn = Math.random() < 0.5 ? "X" : "O"; // random start 50=50!
+          turnDisplay.innerHTML = turn + "'s turn"; //displays player
+        }
+
         function squareHandler() {
-          //game over  -> return
+          if (endGame) return; // same as if endGame === true. returns if game has win or stalemate  (endGame) is a shortcut
+          if (this.innerHTML !== "") return; // no empty spaces, means add
+          this.innerHTML = turn; // instance of X or O in square
 
-          // build array using map or forEach
-          //read innerHTML
-          // if empty store "-" cuz it cant be an empty in a  string array
-          // else store "X" || "o"
-          // moves is length 9
+          // ********************* MAP MOVES ARRAY
+          var moves = [...squares].map(function (sq) {
+            // using spread (!) to convert into an array so map can check against the winCondit
+            if (sq.innerHTML === "")
+              return "-"; // if empty store a "-" so you can check against it: X-O
+            else return sq.innerHTML;
+          });
+          // ********************* CHECK MOVES | DETERMINE NEXT STEP
+          var winConditions = [
+            // the win patterns
+            moves[0] + moves[1] + moves[2],
+            moves[3] + moves[4] + moves[5],
+            moves[6] + moves[7] + moves[8],
+            moves[0] + moves[3] + moves[6],
+            moves[1] + moves[4] + moves[7],
+            moves[2] + moves[5] + moves[8],
+            moves[0] + moves[4] + moves[8],
+            moves[2] + moves[4] + moves[6],
+          ];
 
-          // check for winConditions with includes - truthy cuz it's a string
-          // if winConditions.includes("XXX") -> X wins
-          //set  turnDisplay.innerHTML = "X Wins!"
-          // else winConditions.includes("ooo") -> O wins
-          //set  turnDisplay.innerHTML = "o Wins!"
-          //set endGame = true (string)
-
-          // no win/ no stalemate
-
-          if (this.innerHTML == "X" || this.innerHTML == "O") {
-            //prevents overwriting if the square has an x || an o
+          if (
+            winConditions.includes("XXX")
+          ) // check for winConditions with includes - truthy cuz it's a string
+          {
+            turnDisplay.innerHTML = "X wins!";
+            //add win celebration
+            endGame = true; // change end game - also truthy(String)
             return;
           }
 
-          this.innerHTML = turn; //marks the square with x or o
+          if (winConditions.includes("OOO")) {
+            turnDisplay.innerHTML = "O wins!";
+            //add win celebration
+            endGame = true;
+            return;
+          }
+
+          // ********************* STALEMATE
+
+          if (!moves.includes("-")) {
+            // no squares are empty !moves "-" - boolean truthy
+            turnDisplay.innerHTML = "Stalemate!";
+            //add wah-wah
+            endGame = true;
+            return;
+          }
+
           turn = turn == "X" ? "O" : "X"; // switches turn
-          turnDisplay.innerHTML = turn + "'s turn";
+          turnDisplay.innerHTML = turn + "'s turn"; // displays whose turn it is
         }
-
-        //startbtn.onclick = startGame function
-
-        // function startGame()
       </script>
-      <!--  </div> -->
 
       <a href="https://en.wikipedia.org/wiki/Tic-tac-toe" target="_blank"
         >Game Rules</a
@@ -206,9 +237,3 @@
     </div>
   </body>
 </html>
-
-winConditions = [ // get the item through index because it's a string moves[0] +
-moves[1] +moves[2], moves[3] + moves[4] +moves[5], moves[6] + moves[7]
-+moves[8], moves[0] + moves[3] +moves[6], moves[1] + moves[4] +moves[7],
-moves[2] + moves[5] +moves[8], moves[0] + moves[4] +moves[8], moves[2] +
-moves[4] +moves[6], ]
