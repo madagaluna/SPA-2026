@@ -8,28 +8,89 @@
   <body>
     <script>
       // --
-      // ---------------------------------------- VARIABLES THAT CHANGE STATE --- i.e: var variable = null
+      // ---------------------------------------- VARIABLES THAT CHANGE STATE --- i.e: 
 
-    
       // --==================================--  Functions 
 
       //3. redo 1 and 2, use a fx METHOD to create a class to store menu.  Create an array of 4 instances of the class (one for each food item (obj.key?)) 174
+
+      function MenuItem(name,price)
+      {
+        this.name = name;
+        this.price  = price;
+
+        this.show = function() {
+            return this.name + " $" + this.price;
+        }
+        
+      }
+    
+
+      //instance the class using new
+      ord = new select(hotdog, 4.00);
+      new menuItem1("hotdog", 4)
+      new menuItem2("fries", 3.5)
+      new menuItem3("soda", 1.5)
+      new menuItem4("sauerkraut", 1)
+
+      //put instances into an array
+
+      var menu = [menuItem1, menuItem2, menuItem3, menuItem4 ];
+
+      // display the menue
+
+      document.write("This uses a class")
+
+      menu.forEach(function (item)) 
+      {
+        for (key in menu) document.write (item.name + " $" + item.price + "<br>") 
+       document.write("<hr>")
+      }
+
+      
+
+
+
 
       // ----------------------------------------- EVENTS
 
       // ---------------------------------------- ONLOAD
        // 1.  create and display associative called menu of items (name, price) slide 155
-      // 2. redo part 1 using an object called menu to store and display the menu  items(name,price) slide 157
+       menu = [];
+       menu["hotdog"] = 4.00 
+       menu["fries"] = 3.5 
+       menu["soda"] = 1.5 
+       menu["sauerkraut"] = 1.
+
+       document.write("This uses an associative array")
+       for (key in menu) document.write (key + " $" + menu[key] + "<br>") 
+       document.write("<hr>")
+
+
+      //** 2. redo part 1 using an object called menu to store and display the menu  items(name,price) slide 157
+        var menu = {
+            hotdog: 4.00,
+            fries: 3.5,
+            soda: 1.5,
+            sauerkraut: 1.
+            
+        }
+         document.write("This uses an object")
+         for (key in menu) document.write (key + " $" + menu[key] + "<br>")
 
     </script>
   </body>
 </html>
-/*//<!--
 
-    ▪ The index to an array can be a string! ▪ This creates a key-value pair flowers
+<!--
+
+    ▪ The index to an array can be a string! ▪ This creates a key-value pair
+     flowers
 = []; flowers["daisy"] = 12 //daisy is the key, 12 is the value flowers["rose"]
-= 15 flowers["carnation"] = 8 document.write(flowers["rose"]) //displays 15 for
-(key in flowers) document.write(key + " $" + flowers[key] + " - ") //Output:
+= 15 flowers["carnation"] = 8 document.write(flowers["rose"]) //displays 15 
+for (key in flowers) document.write(key + " $" + flowers[key] + " - ") 
+
+//Output:
 daisy $12 - rose $15 - carnation $8 *************************
 
 157 ▪ 
