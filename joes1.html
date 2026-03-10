@@ -12,44 +12,39 @@
 
       // --==================================--  Functions 
 
-      //3. redo 1 and 2, use a fx METHOD to create a class to store menu.  Create an array of 4 instances of the class (one for each food item (obj.key?)) 174
+      //3. redo 1 and 2, use a fx METHOD to create a class to store menu.  Create an array of 4 instances of the class (one for each food item 174
 
       function MenuItem(name,price)
       {
-        this.name = name;
+        this.name = name;  
         this.price  = price;
 
-        this.show = function() {
-            return this.name + " $" + this.price;
-        }
-        
-      }
+        this.show = function () {
+            return this.name + " $" + this.price;  //using show method
+        };  //end show
+      } // end function
     
+      //instance the class using new for each food iteam
+      var menu = [
+      new MenuItem("hotdog", 4),
+      new MenuItem("fries", 3.5),
+      new MenuItem("soda", 1.5),
+      new MenuItem("sauerkraut", 1),
+    ];
 
-      //instance the class using new
-      ord = new select(hotdog, 4.00);
-      new menuItem1("hotdog", 4)
-      new menuItem2("fries", 3.5)
-      new menuItem3("soda", 1.5)
-      new menuItem4("sauerkraut", 1)
-
-      //put instances into an array
-
-      var menu = [menuItem1, menuItem2, menuItem3, menuItem4 ];
 
       // display the menue
 
-      document.write("This uses a class")
+      document.write("This uses a class:" + "<br>");
 
-      menu.forEach(function (item)) 
+      menu.forEach(function (item)
       {
-        for (key in menu) document.write (item.name + " $" + item.price + "<br>") 
-       document.write("<hr>")
+        document.write (item.show() + "<br>")     
       }
+  
+    );
 
-      
-
-
+      document.write( "<hr>");
 
 
       // ----------------------------------------- EVENTS
@@ -62,7 +57,7 @@
        menu["soda"] = 1.5 
        menu["sauerkraut"] = 1.
 
-       document.write("This uses an associative array")
+       document.write("This uses an associative array:" + "<br>")
        for (key in menu) document.write (key + " $" + menu[key] + "<br>") 
        document.write("<hr>")
 
@@ -75,7 +70,7 @@
             sauerkraut: 1.
             
         }
-         document.write("This uses an object")
+         document.write("This uses an object:" + "<br>")
          for (key in menu) document.write (key + " $" + menu[key] + "<br>")
 
     </script>
