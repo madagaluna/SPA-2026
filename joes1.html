@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joes1</title>
+  </head>
+  <body>
+    <script>
+      // --
+      // ---------------------------------------- VARIABLES THAT CHANGE STATE --- i.e: var variable = null
+
+    
+      // --==================================--  Functions 
+
+      //3. redo 1 and 2, use a fx METHOD to create a class to store menu.  Create an array of 4 instances of the class (one for each food item (obj.key?)) 174
+
+      // ----------------------------------------- EVENTS
+
+      // ---------------------------------------- ONLOAD
+       // 1.  create and display associative called menu of items (name, price) slide 155
+      // 2. redo part 1 using an object called menu to store and display the menu  items(name,price) slide 157
+
+    </script>
+  </body>
+</html>
+/*//<!--
+
+    ▪ The index to an array can be a string! ▪ This creates a key-value pair flowers
+= []; flowers["daisy"] = 12 //daisy is the key, 12 is the value flowers["rose"]
+= 15 flowers["carnation"] = 8 document.write(flowers["rose"]) //displays 15 for
+(key in flowers) document.write(key + " $" + flowers[key] + " - ") //Output:
+daisy $12 - rose $15 - carnation $8 *************************
+
+157 ▪ 
+
+▪ The index to an array can be a string!
+▪ This creates a key-value pair
+flowers = [];
+flowers["daisy"] = 12 //daisy is the key, 12 is the value
+flowers["rose"] = 15
+flowers["carnation"] = 8
+document.write(flowers["rose"]) //displays 15
+for (key in flowers)
+document.write(key + " $" + flowers[key] + " - ")
+//Output: daisy $12 - rose $15 - carnation $8
+
+
+7
+JS Objects
+▪ An object can be a set of name - value pairs:
+var flowers = {
+daisy: 12,
+rose: 15,
+carnation: 8
+}
+document.write (flowers['rose’]) //displays 15
+document.write (Object.keys(flowers))
+// displays: daisy,rose,carnation
+
+************ 174:
+function Rectangle(len, wid)
+{
+this.length = len;
+this.width = wid;
+this.area = area; //from the Function below
+}
+
+access the data members using the dot notation
+area = r.length * r.width;
+THIS CAN BE A FUNCTION
+function area()
+{
+	return this.length * this.width;
+}
+instance the class using new
+r = new Rectangle(3,4);
+rectArea = r.area(); 
