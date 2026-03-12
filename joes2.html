@@ -10,16 +10,16 @@
         font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
       #mainFrame {
-        background-color: rgb(240, 154, 42);
+        background-color: rgb(184, 37, 3);
         width: 500px;
-        height: 800px;
+        height: 500px;
         border: 2px solid #333;
         margin: auto; /*centered the mainframe - it's fixed width */
       }
 
       h1 {
         display: block;
-        background-color: rgb(159, 156, 152);
+        background-color: rgb(240, 154, 42);
         border: 1px dotted #333;
         width: 350px;
         text-transform: uppercase;
@@ -61,7 +61,7 @@
       .menu {
         /* nee square */
         display: block; /* wraps the boxes bases on frame width */
-        background-color: rgb(159, 156, 152);
+        background-color:rgb(240, 154, 42);
          /* gives the text a height to be centered on */
         text-align: center; /*keeps x and 0's in the center, not on the left */
          /* vertical-align: top; /* keeps the squares horizontally ? alligned - aligned to the top */
@@ -70,7 +70,7 @@
         
      
         box-sizing: border-box; /* tightens the borders by including padding and te xt */
-        margin: 5px;
+        margin: 20px 
       }
       .menu:hover {
         background-color: #3545c5;
@@ -89,7 +89,7 @@
         text-align: center;
         padding: 15px 0 15px 0;
         box-sizing: border-box;
-        margin: 25px auto 15px auto;
+        margin: 50px auto 15px auto;
       }
 
       a:hover {
@@ -104,7 +104,7 @@
         text-decoration: none;
         display: block;
         background-color: rgb(159, 156, 152);
-        color: #333;
+        color: rgb(240, 154, 42);
         border: 1px solid #333;
         font-size: 25px;
         width: 300px;
@@ -132,7 +132,14 @@
       // ---------------------------------------- VARIABLES THAT CHANGE
       //s
       // selected items
-      // cart
+      var cart = {
+        hotdog: 0,
+        fries: 0,
+        soda: 0,
+        sauerkraut: 0,
+      };
+
+      var sale = 0
 
       // ---------------------------------------Data
 
@@ -143,30 +150,37 @@
         sauerkraut: 1,
       };
 
-      var cart = {
-        hotdog: 0,
-        fries: 0,
-        soda: 0,
-        sauerkraut: 0,
-      };
 
       // --==================================--  Functions
 
       // ---------------------------------------- ONLOAD
     
-     
 
       //display menu 
        for (key in menu) // document.write(key + " $" + menu[key] + "<br>");
       document.write("<div = class='menu'>" + key + "    $" +  menu[key] + "<br>")
-    
+                
+      //displaycart
+
+              // clear cart display
+              // forEach item in cart
+              // if quantity > 0 
+              // show item + quantity
       //addToCart
+              //cart[selectItem]++
       //checkout
 
       // ----------------------------------------- EVENTS
 
       // add to cart button click
+
+          // total = 0
+         //  forEach item in cart
+         // itemTotal = quantity * price
+         // add to total 
       //checkout button click
+
+
     </script>
     </div>
   </body>

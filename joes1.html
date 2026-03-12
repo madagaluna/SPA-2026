@@ -14,17 +14,17 @@
 
       //3. redo 1 and 2, use a fx METHOD to create a class to store menu.  Create an array of 4 instances of the class (one for each food item 174
 
-      function MenuItem(name,price)
-      {
+      function MenuItem(name,price) // class is a blueprint|recipe  (notes for myself)
+      { 
         this.name = name;  
         this.price  = price;
 
         this.show = function () {
-            return this.name + " $" + this.price;  //using show method
+            return this.name + " $" + this.price;  //using show method - takeaway: objects can have both properties and methods
         };  //end show
       } // end function
     
-      //instance the class using new for each food iteam
+      //instance the class using NEW for each food iteam
       var menu = [
       new MenuItem("hotdog", 4),
       new MenuItem("fries", 3.5),
@@ -33,7 +33,7 @@
     ];
 
 
-      // display the menue
+      // display the menu
 
       document.write("This uses a class:" + "<br>");
 
@@ -59,6 +59,8 @@
 
        document.write("This uses an associative array:" + "<br>")
        for (key in menu) document.write (key + " $" + menu[key] + "<br>") 
+       document.write("Associative arrays only count numeric indexes (tic-Tic-tac-toe), not strings (labels) so 'menu.length' = " + menu.length + "<br>")
+      document.write("Associative arrays are good for ordered list and if you care about position like in Tic-tac-toe "+ "<br>")
        document.write("<hr>")
 
 
@@ -72,6 +74,8 @@
         }
          document.write("This uses an object:" + "<br>")
          for (key in menu) document.write (key + " $" + menu[key] + "<br>")
+         document.write("Objects uses 'Object.keys(menu).length' to find length = " + Object.keys(menu).length + "<br>")
+         document.write("Objects are good for things with labels like menus :)" + "<br>")
 
     </script>
   </body>
