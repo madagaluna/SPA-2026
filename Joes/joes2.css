@@ -1,0 +1,105 @@
+
+      body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      #mainFrame {
+        background-color: rgb(184, 37, 3);
+        width: 500px;
+        height: 700px;
+        border: 2px solid #333;
+        margin: auto; /*centered the mainframe - it's fixed width */
+      }
+
+      h1 {
+        display: block;
+        background-color: rgb(240, 154, 42);
+        border: 1px dotted #333;
+        width: 350px;
+        text-transform: uppercase;
+        color: #333;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px 0 15px 0;
+        box-sizing: border-box;
+        margin: 25px auto 15px auto;
+      }
+    
+      #menu {
+        /* nee square */
+        display: block; /* wraps the boxes bases on frame width */
+        background-color:rgb(240, 154, 42);
+         /* gives the text a height to be centered on */
+        text-align: center; /*keeps x and 0's in the center, not on the left */
+         /* vertical-align: top; /* keeps the squares horizontally ? alligned - aligned to the top */
+        color: #333;
+        font-size: 20px;
+        
+     
+        box-sizing: border-box; /* tightens the borders by including padding and te xt */
+        margin: 20px 
+    
+      }
+   #cart {
+        /* nee square */
+        display: block; /* wraps the boxes bases on frame width */
+        background-color: rgb(159, 156, 152);
+         /* gives the text a height to be centered on */
+        text-align: center; /*keeps x and 0's in the center, not on the left */
+         /* vertical-align: top; /* keeps the squares horizontally ? alligned - aligned to the top */
+        color: #333;
+        font-size: 20px;
+        
+     
+        box-sizing: border-box; /* tightens the borders by including padding and te xt */
+        margin: 20px 
+      }
+     #menuSelect {
+ 
+        display: block;
+         background-color:rgb(240, 154, 42);
+         /* gives the text a height to be centered on */
+        text-align: center; /*keeps x and 0's in the center, not on the left */
+         /* vertical-align: top; /* keeps the squares horizontally ? alligned - aligned to the top */
+        color: #333;
+        font-size: 20px;
+         margin: auto;
+     
+        box-sizing: border-box; 
+        margin: 20px 
+      }
+ 
+      input[type="button"] {
+        font-family:
+          Verdana, Geneva, Tahoma, sans-serif; 
+        display: inblock;
+        background-color: rgb(159, 156, 152);
+        color: rgb(184, 37, 3);
+        border: 1px solid #333;
+        font-size: 25px;
+        width: 215px;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-align: center;
+        padding: 15px;
+        box-sizing: border-box;
+        margin: auto auto auto 20px;
+        vertical-align: bottom;
+      }
+
+      input[type="button"]:hover {
+        background-color: #010104;
+        color: #fff;
+      }
+      </style>
+  </head>
+  <body>
+    <div id="mainFrame">
+      <h1>JOE'S HOTDOG STAND</h1>
+      <div id="menu"></div>  
+      
+       <select id="menuSelect"></select>
+      <input type="button" value="add To Cart" id="addBtn">
+      
+      <div id="cart"></div>
+      <input type="button" value="checkout" id="checkoutbtn">
+
