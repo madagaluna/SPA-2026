@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Wordle</title>
+  </head>
+
+  <body>
+    <script>
+        // ++++++++++++++++++++++++++++++++++++++ data
+                // answer
+                //guesses[]
+                // currentGuess
+                // guessesLeft = 6
+                // usedLetters = {correctPlace: "green", wrongPlace: "yellow", nope: "gray"}
+                // gameOver = true/false
+        //  ++++++++++++++++++++++++++++++++++++++  html/CSS / dom 
+                // title
+                //guess input box / convert to uppercase, store as currentGuess, depreciate guessesLeft by 1
+                //submit button
+                // board rows
+                // used letter board
+                //gameOver message
+                //restart
+
+        
+        // ++++++++++++++++++++++++++++++++++++++ functions
+                //getWord()
+                //validateGuess() 
+                    // length = 5, 
+                    // letters only,
+                    
+
+                //compareGuess()
+                    // if letter and same spot = green,
+                     //  else if letter exists elsewhere = yellow, 
+                    // else = grey
+                    // how to handle duplicate letters?
+                
+                  //Display message if validateGuess() is false or gameOver is false
+
+                //evaluateGuess(currentGuess, answer){
+                    //return ["usedLetters.value","","","",""]}
+                
+                //updateBoard()
+       
+                //checkWin()
+                  //currentGuess === answer ||  guessesLeft === 0 = gameOver = true
+                
+                // gameOver()
+                    //disable input
+                    //show message
+                  
+
+                //resetGame()
+                     //guesses = []
+                   // guessesLeft = 6
+                    //usedLetters = {}
+                    //gameOver = false
+                    //clear boards
+                    //get new answer
+
+
+
+        // ++++++++++++++++++++++++++++++++++++++   events 
+
+            //submit button for text input
+            
+        //  ++++++++++++++++++++++++++++++++++++++ onload
+
+
+            //check win conditon check 
+            // loss condition 
+            // disable input when over
+            //  allow restart
+    
+    </script>
+
+
+
+    <script></script>
+  </body>
+</html>
+<!--You are required to use one API in this app.  You may use an API to choose the word to guess.  Alternatively, you may use an API to check that the user’s guess is a valid word. 
+API’s must return JSON and must be accessed using XMLHttpRequest or a promise / fetch.
+
+Note: You may not use React for this assignment.  You may not research/copy code solutions for this assignment.
+
+The board:
+The screenshot is a model of how your implementation should appear.  You are welcome to add enhancements as long as you meet the requirements.  Note:  Use an input box to enter the guess – this deviates from the NY Times version.
+ 
+
+ 
+Used letter board:
+You will need to display a used letter board indicating letters used.  The used letter board must include a visual indicator of whether the used letter was correct/in the wrong place/ or not in the word.  An example is shown below.  Note, the color reflects “green” if any guess shows the letter in the right place.
+
+ 
+
+
+
+Game play:
+The player has 6 tries to guess a 5 letter word.
+Guesses must be 5 letter words (you will need to validate this)
+For each letter in the guess, you must report one of three results: 
+if the letter is not in the answer (grey)
+if the letter is in the answer but in a different place than in your guess word (yellow)
+if the letter is in the same place as in the guess word (green)
+
+
+The game ends when the user guesses the word or uses all 6 guesses.
+
+Note:  If a letter appears twice in the guess but only once in the answer, you must eliminate all possible yellow/green responses and then consider any repeat letters.
+For example – if the answer is “create” and the guess is “tacit”
+t is yellow
+a is yellow
+c is yellow
+i is grey
+t is grey
+ 
+Required Features:
+•	Display a used letter board so that the user can avoid letters that have been eliminated.
+•	Include a “debug” mode that displays the answer in the console so that it is easier to check correct operation.
+•	Allows the user to play multiple games – i.e., you need to handle restarting the game.
+•	Responsive to tablet size (down to 700px)
+•	Comments must precede each function plus inline comments as appropriate
+•	Must work online
+
+Optional Features:
+•	Track statistics of wins and losses- and how many guesses a win needed.
+•	Add some animation when the user wins.
+•	Other?  
