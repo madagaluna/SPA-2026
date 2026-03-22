@@ -9,55 +9,73 @@
     <script>
         // ++++++++++++++++++++++++++++++++++++++ data
                 // answer
-                //guesses[]
-                // currentGuess
+                // currentGuess = "" // string
+                // guesses[] //previous guesses
                 // guessesLeft = 6
                 // usedLetters = {correctPlace: "green", wrongPlace: "yellow", nope: "gray"}
-                // gameOver = true/false
+                // gameOver = false
         //  ++++++++++++++++++++++++++++++++++++++  html/CSS / dom 
                 // title
-                //guess input box / convert to uppercase, store as currentGuess, depreciate guessesLeft by 1
+                //guess input box 
                 //submit button
-                // board rows
-                // used letter board
-                //gameOver message
-                //restart
+                // board
+                // usedLettersBoard
+                //messageArea
+                //restartBtn
 
         
         // ++++++++++++++++++++++++++++++++++++++ functions
                 //getWord()
+
                 //validateGuess() 
                     // length = 5, 
-                    // letters only,
-                    
-
-                //compareGuess()
-                    // if letter and same spot = green,
-                     //  else if letter exists elsewhere = yellow, 
-                    // else = grey
-                    // how to handle duplicate letters?
+                    // letters only, 
+                    // gameOver=false
                 
-                  //Display message if validateGuess() is false or gameOver is false
+                    //Display message if validateGuess() is false 
+
 
                 //evaluateGuess(currentGuess, answer){
+                    // if letter and same spot = green,
+                    //  else if letter exists elsewhere = yellow, 
+                    // else = grey
                     //return ["usedLetters.value","","","",""]}
                 
-                //updateBoard()
-       
-                //checkWin()
-                  //currentGuess === answer ||  guessesLeft === 0 = gameOver = true
+                     // how to handle duplicate letters?
                 
-                // gameOver()
+                //updateBoard(currentGuess,result)
+                    //add new row for guess
+                    // display each letter
+                    //color each letter based on evaluateGuess()
+
+                //updateUsedLetters(currentGuess,result)
+                    //loop through letters in the guess
+                    //update usedLetters - object :""
+                    //apply color through rule: green > yellow > gray 
+       
+                //checkWin(currentGuess, answer, guessesLeft)
+                  //currentGuess === answer = true
+                  //  guessesLeft === 0, return true
+                  // else  false
+                
+                // finishGame(message)
+                    //gameOver = true
                     //disable input
-                    //show message
+                    // show message
                   
 
                 //resetGame()
-                     //guesses = []
-                   // guessesLeft = 6
+                      // clear all ("")  
+                     //answer = getWord() 
+                     // currentGuess=""
+                     //guesses =[]
+                    // guessesLeft = 6
                     //usedLetters = {}
                     //gameOver = false
                     //clear boards
+                    //clear usedLetterBoard
+                    //clear message
+                    //re-enable input
                     //get new answer
 
 
@@ -65,14 +83,28 @@
         // ++++++++++++++++++++++++++++++++++++++   events 
 
             //submit button for text input
+                 //   read input,
+                //  convert to uppercase, 
+                // validate guess, 
+                // evaluate guess, 
+                // update board, 
+                // update used letters, 
+                // store guess in guesses, 
+                // depreciate guessesLeft, 
+                // check win/loss, 
+                 // if over, finish game, 
+                 // clear input box
+
+              //restart button click   
+
             
         //  ++++++++++++++++++++++++++++++++++++++ onload
 
 
-            //check win conditon check 
-            // loss condition 
-            // disable input when over
-            //  allow restart
+            //get word
+            // init state 
+            // connect buttons
+            //  debug using console.log(answer)
     
     </script>
 
