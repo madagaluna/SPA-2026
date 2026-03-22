@@ -3,12 +3,33 @@
   <head>
     <meta charset="utf-8" />
     <title>Wordle</title>
-  </head>
+      <style>
+        body{
+         font-family:Verdana, Geneva, Tahoma, sans-serif;
+         text-align: center;
+        
+      }
+
+      #board {
+        margin: 20px auto;
+      }
+
+      #usedLetters {
+        margin-top: 20px;
+      }
+
+
+
+  </style>
+ </head>
+
+  <body>
 <h1>Wordle</h1>
 
-<input type = "text" id="enterEuess" maxlength = "5">
+    <input type = "text" id="enterGuess" maxlength = "5">
 <input type = "button" id="'submitBtn" value = "Enter">
-  <body>
+<div id ="board"></div>
+<div id="usedLetters"></div>
     <script>
         // ++++++++++++++++++++++++++++++++++++++ data
                 // answer
