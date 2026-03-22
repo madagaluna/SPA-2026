@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <title>Wordle</title>
   </head>
+<h1>Wordle</h1>
 
+<input type = "text" id="enterEuess" maxlength = "5">
+<input type = "button" id="'submitBtn" value = "Enter">
   <body>
     <script>
         // ++++++++++++++++++++++++++++++++++++++ data
@@ -25,12 +28,31 @@
 
         
         // ++++++++++++++++++++++++++++++++++++++ functions
-                //getWord()
+          /*    function handleSubmit() {
+                var guess = getGuess
+              } read input,
+                //  convert to uppercase, 
+                // validate guess, 
+                /* for i from 0 to 4
+                       if guess[i] === answer[i]
+                        green
+                        else if answer includes guess[i]
+                        yellow
+                        else
+                        gray */
+                // evaluate guess, 
+                // update board, 
+                // update used letters, 
+                // store guess in guesses, 
+                // depreciate guessesLeft, 
+                // check win/loss, 
+                 // if over, finish game, 
+                 // clear input box//getWord()
 
                 //validateGuess() 
-                    // length = 5, 
-                    // letters only, 
-                    // gameOver=false
+                    // if length !== 5, reject
+                    // if !letters, reject 
+                    // if gameOver= true, reject
                 
                     //Display message if validateGuess() is false 
 
@@ -40,6 +62,13 @@
                     //  else if letter exists elsewhere = yellow, 
                     // else = grey
                     //return ["usedLetters.value","","","",""]}
+                    //for i from 0 to 4
+                     /*   if guess[i] === answer[i]
+                        green
+                        else if answer includes guess[i]
+                        yellow
+                        else
+                        gray */
                 
                      // how to handle duplicate letters?
                 
@@ -83,17 +112,7 @@
         // ++++++++++++++++++++++++++++++++++++++   events 
 
             //submit button for text input
-                 //   read input,
-                //  convert to uppercase, 
-                // validate guess, 
-                // evaluate guess, 
-                // update board, 
-                // update used letters, 
-                // store guess in guesses, 
-                // depreciate guessesLeft, 
-                // check win/loss, 
-                 // if over, finish game, 
-                 // clear input box
+              
 
               //restart button click   
 
@@ -101,7 +120,9 @@
         //  ++++++++++++++++++++++++++++++++++++++ onload
 
 
-            //get word
+            //on submit
+            // guess = getGuess()
+            // if !validate
             // init state 
             // connect buttons
             //  debug using console.log(answer)
