@@ -26,26 +26,21 @@
   <body>
 <h1>Wordle</h1>
 
-    <input type = "text" id="enterGuess" maxlength = "5">
-<input type = "button" id="'submitBtn" value = "Enter">
-<div id ="board"></div>
-<div id="usedLetters"></div>
+        <!--  ++++++++++++++++++++++++++++++++++++++  html/CSS / dom -->
+
+  <input type = "text" id="enterGuess" maxlength = "5">
+  <input type = "button" id="'submitBtn" value = "Enter">
+  <div id ="board"></div>
+  <div id="usedLetters"></div>
+                 <!--messageArea
+                 restartBtn -->
     <script>
         // ++++++++++++++++++++++++++++++++++++++ data
-                // answer
-                // currentGuess = "" // string
-                // guesses[] //previous guesses
-                // guessesLeft = 6
-                // usedLetters = {correctPlace: "green", wrongPlace: "yellow", nope: "gray"}
-                // gameOver = false
-        //  ++++++++++++++++++++++++++++++++++++++  html/CSS / dom 
-                // title
-                //guess input box 
-                //submit button
-                // board
-                // usedLettersBoard
-                //messageArea
-                //restartBtn
+                var answer = "Slate" // use API?
+                var guesses= []; //previous guesses
+                var guessesLeft = 6;
+                var usedLetters = {correctPlace: "green", wrongPlace: "yellow", nope: "gray"}
+                var gameOver = false;
 
         
         // ++++++++++++++++++++++++++++++++++++++ functions
@@ -141,7 +136,9 @@
         //  ++++++++++++++++++++++++++++++++++++++ onload
 
 
-            //on submit
+            window.onload = function(){
+              createBoard
+            }
             // guess = getGuess()
             // if !validate
             // init state 
@@ -169,9 +166,6 @@ Used letter board:
 You will need to display a used letter board indicating letters used.  The used letter board must include a visual indicator of whether the used letter was correct/in the wrong place/ or not in the word.  An example is shown below.  Note, the color reflects “green” if any guess shows the letter in the right place.
 
  
-
-
-
 Game play:
 The player has 6 tries to guess a 5 letter word.
 Guesses must be 5 letter words (you will need to validate this)
@@ -182,14 +176,6 @@ if the letter is in the same place as in the guess word (green)
 
 
 The game ends when the user guesses the word or uses all 6 guesses.
-
-Note:  If a letter appears twice in the guess but only once in the answer, you must eliminate all possible yellow/green responses and then consider any repeat letters.
-For example – if the answer is “create” and the guess is “tacit”
-t is yellow
-a is yellow
-c is yellow
-i is grey
-t is grey
  
 Required Features:
 •	Display a used letter board so that the user can avoid letters that have been eliminated.
