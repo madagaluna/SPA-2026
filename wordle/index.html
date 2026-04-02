@@ -10,27 +10,27 @@
       }
 
       #boardframe {
-        width: 400px;
-        height: 400px;
+        width: 305px;
+        height: 375px;
         border: 1px solid #333;
-        margin: 50px auto;
+        margin: 60px auto;
       }
 
       /*--  #frame{
         width: 600px;
-        height: 600px; 
+        height: 600px;
         /* text-align: center; centering the boxes and text in frame/ boxes (child)
         border: 2px solid #868585;
-        margin: auto; /*centered in the mainFrame 
+        margin: auto; /*centered in the mainFrame
         box-sizing: border-box; /* maths padding, etc
 
       } */
       #enterGuess {
-        margin: 0px;
+        margin: 20px;
       }
 
       #board {
-        margin: 20px;
+        margin: 10px;
       }
 
       #usedLetters {
@@ -60,6 +60,13 @@
       .row {
         margin: 5px;
       }
+
+      #restartBtn,  /* comm = both*/
+      #submitBtn {
+        margin: 2px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
     </style>
   </head>
 
@@ -71,18 +78,19 @@
     <input type="text" id="enterGuess" maxlength="5" />
     <!-- limit length here and check length -->
     <input type="button" id="submitBtn" value="Guess" />
+    <input type="button" id="restartBtn" value="Restart Game" />
+    <div id="message"></div>
     <div id="frame">
       <div id="boardframe">
         <div id="board"></div>
       </div>
+
       <div id="usedLetters"></div>
     </div>
-    <div id="message"></div>
-    <input type="button" id="restartBtn" value="Restart Game" />
 
     <script>
       // ++++++++++++++++++++++++++++++++++++++ data
-      var answer = "SLATE"; // use API? - string means can use .length, [i] === includes
+      var answer = "TATAT"; // use API? - string means can use .length, [i] === includes
       var guesses = []; //previous guesses, can use push, order matters = array
       var guessesLeft = 6;
       var usedLetters = {}; //object  each letter-> place
@@ -163,36 +171,30 @@
 
         return true;
       }
-
-      /*    function handleSubmit() {
-                                                var guess = getGuess
-                                              } read input,
-                                                //  convert to uppercase,
-                                                // validate guess,
-                                                /* for i from 0 to 4
-                                                       if guess[i] === answer[i]
-                                                        green
-                                                        else if answer includes guess[i]
-                                                        yellow
-                                                        else
-                                                        gray */
-
-      // update board,
-      // update used letters,
-      // store guess in guesses,
-      // depreciate guessesLeft,
-      // check win/loss,
-      // if over, finish game,
-      // clear input box//getWord()function handleSubmit() {
-
-      // get user's guess and stop if invalid
-      // evaluate guess,
       function compareGuess(guess, answer) {
         // array to store color results
-        result = [];
+        var result = [];
+        //find duplicates -string -> array (to modify and track)
+        var answerArr = answer.split("");
 
-        for (i = 0; i < 5; i++) {
-          // correct letter in correct position
+        // check for correct pos and place
+        for (var i = 0; i < 5; i++) {
+          if (guess[i] === answerArr[i]) {
+            result[i] = "green";
+            answerArr[i] = null; // mark as used
+          }
+        }
+
+        // check for yellow and grey
+        for (var i = 0; i < 5; i++) {
+          if (result[i]) continue; // skip anything green
+          var index = answerArr.indexOf(guess[i]);
+          if (index !== -1) {
+            result[i] = "yellow";
+            answerArr[index] = null; // removed this letter from matching
+          } else {
+            result[i] = "gray";
+          }
 
           if (guess[i] === answer[i]) {
             result.push("green");
@@ -215,9 +217,8 @@
         var rowIndex = guesses.length;
         var row = document.getElementById("row" + rowIndex);
         // clear row before inserting boxs
-
         row.innerHTML = "";
-        // create 5 colored boxs
+        // create  and place letter in 5 boxes
         for (i = 0; i < 5; i++) {
           row.innerHTML +=
             "<div class='place' style='background-color:" +
@@ -310,7 +311,7 @@
         guessesLeft = 6;
         usedLetters = {};
         gameOver = false;
-        answer = "PRIDE"; // later replace with getWrd()
+        answer = "SLATE"; // later replace with getWrd()
 
         // New Game
         createBoard();

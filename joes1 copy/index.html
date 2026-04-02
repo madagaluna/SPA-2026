@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joes Class another way</title>
+  </head>
+  <body>
+    <script>
+      function MenuItem(name, price) {
+        this.name = name;
+        this.price = price;
+        this.show = function () {
+          return this.name + " $" + this.price;
+        };
+      }
+
+      function Menu2(items, prices) {
+        this.menu2Items = [];
+        for (i = 0; i < items.length; i++) {
+          this.menu2Items.push(new MenuItem(items[i], prices[i]));
+        }
+        this.displayMenu = function () {
+          this.menu2Items.forEach(function (mitem) {
+            document.write("menu2 " + mitem.show() + "<br>");
+          });
+        };
+      }
+      joesMenu = new Menu2(["hotdog", "fries"], [5, 3]);
+      joesMenu.displayMenu();
+    </script>
+  </body>
+</html>
