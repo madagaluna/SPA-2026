@@ -3,189 +3,328 @@
   <head>
     <meta charset="utf-8" />
     <title>Wordle</title>
-      <style>
-        body{
-         font-family:Verdana, Geneva, Tahoma, sans-serif;
-         text-align: center;
-        
+    <style>
+      body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-align: center;
+      }
+
+      #boardframe {
+        width: 400px;
+        height: 400px;
+        border: 1px solid #333;
+        margin: 50px auto;
+      }
+
+      /*--  #frame{
+        width: 600px;
+        height: 600px; 
+        /* text-align: center; centering the boxes and text in frame/ boxes (child)
+        border: 2px solid #868585;
+        margin: auto; /*centered in the mainFrame 
+        box-sizing: border-box; /* maths padding, etc
+
+      } */
+      #enterGuess {
+        margin: 0px;
       }
 
       #board {
-        margin: 20px auto;
+        margin: 20px;
       }
 
       #usedLetters {
         margin-top: 20px;
       }
+      .letterBox {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #333;
+        margin-top: 5px;
+        font-size: 14px;
+      }
 
+      .place {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        border: 1px solid #333;
+        margin: 2px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
 
-
-  </style>
- </head>
+      .row {
+        margin: 5px;
+      }
+    </style>
+  </head>
 
   <body>
-<h1>Wordle</h1>
+    <h1>Wordle</h1>
 
-        <!--  ++++++++++++++++++++++++++++++++++++++  html/CSS / dom -->
+    <!--  ++++++++++++++++++++++++++++++++++++++  html/CSS / dom -->
 
-  <input type = "text" id="enterGuess" maxlength = "5">
-  <input type = "button" id="'submitBtn" value = "Enter">
-  <div id ="board"></div>
-  <div id="usedLetters"></div>
-                 <!--messageArea
-                 restartBtn -->
+    <input type="text" id="enterGuess" maxlength="5" />
+    <!-- limit length here and check length -->
+    <input type="button" id="submitBtn" value="Guess" />
+    <div id="frame">
+      <div id="boardframe">
+        <div id="board"></div>
+      </div>
+      <div id="usedLetters"></div>
+    </div>
+    <div id="message"></div>
+    <input type="button" id="restartBtn" value="Restart Game" />
+
     <script>
-        // ++++++++++++++++++++++++++++++++++++++ data
-                var answer = "Slate" // use API?
-                var guesses= []; //previous guesses
-                var guessesLeft = 6;
-                var usedLetters = {correctPlace: "green", wrongPlace: "yellow", nope: "gray"}
-                var gameOver = false;
+      // ++++++++++++++++++++++++++++++++++++++ data
+      var answer = "SLATE"; // use API? - string means can use .length, [i] === includes
+      var guesses = []; //previous guesses, can use push, order matters = array
+      var guessesLeft = 6;
+      var usedLetters = {}; //object  each letter-> place
+      var gameOver = false;
 
-        
-        // ++++++++++++++++++++++++++++++++++++++ functions
-          /*    function handleSubmit() {
-                var guess = getGuess
-              } read input,
-                //  convert to uppercase, 
-                // validate guess, 
-                /* for i from 0 to 4
-                       if guess[i] === answer[i]
-                        green
-                        else if answer includes guess[i]
-                        yellow
-                        else
-                        gray */
-                // evaluate guess, 
-                // update board, 
-                // update used letters, 
-                // store guess in guesses, 
-                // depreciate guessesLeft, 
-                // check win/loss, 
-                 // if over, finish game, 
-                 // clear input box//getWord()
+      //  ++++++++++++++++++++++++++++++++++++++ onload
 
-                //validateGuess() 
-                    // if length !== 5, reject
-                    // if !letters, reject 
-                    // if gameOver= true, reject
-                
-                    //Display message if validateGuess() is false 
+      window.onload = function () {
+        createBoard();
 
+        createUsedLettersBoard();
 
-                //evaluateGuess(currentGuess, answer){
-                    // if letter and same spot = green,
-                    //  else if letter exists elsewhere = yellow, 
-                    // else = grey
-                    //return ["usedLetters.value","","","",""]}
-                    //for i from 0 to 4
-                     /*   if guess[i] === answer[i]
-                        green
-                        else if answer includes guess[i]
-                        yellow
-                        else
-                        gray */
-                
-                     // how to handle duplicate letters?
-                
-                //updateBoard(currentGuess,result)
-                    //add new row for guess
-                    // display each letter
-                    //color each letter based on evaluateGuess()
+        // attach click handlers to the button
+        document.getElementById("submitBtn").onclick = handleSubmit;
+        document.getElementById("restartBtn").onclick = resetGame;
 
-                //updateUsedLetters(currentGuess,result)
-                    //loop through letters in the guess
-                    //update usedLetters - object :""
-                    //apply color through rule: green > yellow > gray 
-       
-                //checkWin(currentGuess, answer, guessesLeft)
-                  //currentGuess === answer = true
-                  //  guessesLeft === 0, return true
-                  // else  false
-                
-                // finishGame(message)
-                    //gameOver = true
-                    //disable input
-                    // show message
-                  
+        // CHECK shows answer in console
+        console.log("show answer:", answer);
+      };
 
-                //resetGame()
-                      // clear all ("")  
-                     //answer = getWord() 
-                     // currentGuess=""
-                     //guesses =[]
-                    // guessesLeft = 6
-                    //usedLetters = {}
-                    //gameOver = false
-                    //clear boards
-                    //clear usedLetterBoard
-                    //clear message
-                    //re-enable input
-                    //get new answer
+      // ++++++++++++++++++++++++++++++++++++++ functions
 
+      // creates 6 rows (change line to row?)
+      function createBoard() {
+        var board = document.getElementById("board");
+        // for each, clear any existing content
+        board.innerHTML = "";
+        for (i = 0; i < 6; i++) {
+          // give each row a unique id use innerHTML**
+          board.innerHTML += "<div class='row' id='row" + i + "'></div>";
+        }
+      }
 
+      function createUsedLettersBoard() {
+        // create the alphabet board
+        var used = document.getElementById("usedLetters");
+        used.innerHTML = "";
 
-        // ++++++++++++++++++++++++++++++++++++++   events 
+        // use a string for the letters looping through
+        letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        // create one box per letter
+        for (i = 0; i < letters.length; i++) {
+          used.innerHTML +=
+            "<div class='letterBox' id='letter_" +
+            letters[i] +
+            "'>" +
+            letters[i] +
+            "</div>";
+        }
+      }
+      // get  the word/ value from input box amd make uppercase
+      function getGuess() {
+        guess = document.getElementById("enterGuess").value;
+        return guess.toUpperCase();
+      }
 
-            //submit button for text input
-              
+      //validateGuess()
+      // if length !== 5, reject
+      // if !letters, reject
+      // if gameOver= true, reject
+      // verify that it's 5 letters - make sure the game isn't ended first
+      function validateGuess(guess) {
+        if (gameOver) {
+          showMessage("Game is over.");
+          // stop if game already ended
+          console.log("Game is over.");
+          return false;
+        }
+        if (guess.length !== 5) {
+          console.log("Guess must be 5 letters.");
+          return false;
+        }
+        // only letters A–Z
+        if (!/^[A-Z]+$/.test(guess)) {
+          showMessage("Guess must contain letters only.");
+          return false;
+        }
 
-              //restart button click   
+        return true;
+      }
 
-            
-        //  ++++++++++++++++++++++++++++++++++++++ onload
+      /*    function handleSubmit() {
+                                                var guess = getGuess
+                                              } read input,
+                                                //  convert to uppercase,
+                                                // validate guess,
+                                                /* for i from 0 to 4
+                                                       if guess[i] === answer[i]
+                                                        green
+                                                        else if answer includes guess[i]
+                                                        yellow
+                                                        else
+                                                        gray */
 
+      // update board,
+      // update used letters,
+      // store guess in guesses,
+      // depreciate guessesLeft,
+      // check win/loss,
+      // if over, finish game,
+      // clear input box//getWord()function handleSubmit() {
 
-            window.onload = function(){
-              createBoard
-            }
-            // guess = getGuess()
-            // if !validate
-            // init state 
-            // connect buttons
-            //  debug using console.log(answer)
-    
+      // get user's guess and stop if invalid
+      // evaluate guess,
+      function compareGuess(guess, answer) {
+        // array to store color results
+        result = [];
+
+        for (i = 0; i < 5; i++) {
+          // correct letter in correct position
+
+          if (guess[i] === answer[i]) {
+            result.push("green");
+            // correct letter in wrong position
+          } else if (answer.includes(guess[i])) {
+            result.push("yellow");
+
+            // letter not in word
+          } else {
+            result.push("gray");
+          }
+        }
+
+        return result;
+      }
+      // +++++++------------------ Update the board
+      function addRow(guess, result) {
+        // determine which row to fill based on guesses so far
+
+        var rowIndex = guesses.length;
+        var row = document.getElementById("row" + rowIndex);
+        // clear row before inserting boxs
+
+        row.innerHTML = "";
+        // create 5 colored boxs
+        for (i = 0; i < 5; i++) {
+          row.innerHTML +=
+            "<div class='place' style='background-color:" +
+            result[i] +
+            ";'>" +
+            guess[i] +
+            "</div>";
+        }
+      }
+      // +++++++++++++----+++-- apply the colors Colors
+
+      function addUsedLetters(guess, result) {
+        for (i = 0; i < 5; i++) {
+          var letter = guess[i];
+          // get the letter box
+          var box = document.getElementById("letter_" + letter);
+          // change leetter color depending on match
+
+          if (result[i] === "green") {
+            usedLetters[letter] = "green";
+          } else if (
+            result[i] === "yellow" &&
+            usedLetters[letter] !== "green"
+          ) {
+            usedLetters[letter] = "yellow";
+          } else if (
+            result[i] === "gray" &&
+            usedLetters[letter] !== "green" &&
+            usedLetters[letter] !== "yellow"
+          ) {
+            usedLetters[letter] = "gray";
+          }
+          //  apply backcolor in  the boxes
+          box.style.backgroundColor = usedLetters[letter];
+        }
+      }
+      // validate the guess,
+      function handleSubmit() {
+        var guess = getGuess();
+        if (!validateGuess(guess)) return;
+
+        //  compare it to the answer, update the board and used letters, push the guess to the array
+        var result = compareGuess(guess, answer);
+        addRow(guess, result);
+        addUsedLetters(guess, result);
+        guesses.push(guess);
+
+        // decrease the guessLeft
+        guessesLeft--;
+
+        showMessage("Guesses left: " + guessesLeft);
+        document.getElementById("enterGuess").value = "";
+
+        //  win/loss
+        if (guess === answer) {
+          gameOver = true;
+          disableInput();
+          showMessage("You Win!");
+          return;
+        }
+
+        if (guessesLeft == 0) {
+          gameOver = true;
+          disableInput();
+          showMessage("You Lose! Answer was " + answer);
+          return;
+        }
+      }
+      //  disable input and enable input
+
+      function disableInput() {
+        document.getElementById("enterGuess").disabled = true;
+        document.getElementById("submitBtn").disabled = true;
+      }
+
+      function enableInput() {
+        document.getElementById("enterGuess").disabled = false;
+        document.getElementById("submitBtn").disabled = false;
+      }
+      // Show Message
+
+      function showMessage(msg) {
+        document.getElementById("message").innerHTML = msg;
+      }
+
+      // reset DATA variables
+
+      function resetGame() {
+        guesses = [];
+        guessesLeft = 6;
+        usedLetters = {};
+        gameOver = false;
+        answer = "PRIDE"; // later replace with getWrd()
+
+        // New Game
+        createBoard();
+        createUsedLettersBoard();
+        enableInput();
+        showMessage("");
+        // clear input box
+
+        document.getElementById("enterGuess").value = "";
+
+        console.log("CHECK answer:", answer);
+      }
     </script>
-
-
 
     <script></script>
   </body>
 </html>
-<!--You are required to use one API in this app.  You may use an API to choose the word to guess.  Alternatively, you may use an API to check that the user’s guess is a valid word. 
-API’s must return JSON and must be accessed using XMLHttpRequest or a promise / fetch.
-
-Note: You may not use React for this assignment.  You may not research/copy code solutions for this assignment.
-
-The board:
-The screenshot is a model of how your implementation should appear.  You are welcome to add enhancements as long as you meet the requirements.  Note:  Use an input box to enter the guess – this deviates from the NY Times version.
- 
-
- 
-Used letter board:
-You will need to display a used letter board indicating letters used.  The used letter board must include a visual indicator of whether the used letter was correct/in the wrong place/ or not in the word.  An example is shown below.  Note, the color reflects “green” if any guess shows the letter in the right place.
-
- 
-Game play:
-The player has 6 tries to guess a 5 letter word.
-Guesses must be 5 letter words (you will need to validate this)
-For each letter in the guess, you must report one of three results: 
-if the letter is not in the answer (grey)
-if the letter is in the answer but in a different place than in your guess word (yellow)
-if the letter is in the same place as in the guess word (green)
-
-
-The game ends when the user guesses the word or uses all 6 guesses.
- 
-Required Features:
-•	Display a used letter board so that the user can avoid letters that have been eliminated.
-•	Include a “debug” mode that displays the answer in the console so that it is easier to check correct operation.
-•	Allows the user to play multiple games – i.e., you need to handle restarting the game.
-•	Responsive to tablet size (down to 700px)
-•	Comments must precede each function plus inline comments as appropriate
-•	Must work online
-
-Optional Features:
-•	Track statistics of wins and losses- and how many guesses a win needed.
-•	Add some animation when the user wins.
-•	Other?  
