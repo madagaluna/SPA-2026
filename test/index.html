@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Wordle</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      #boardframe {
+        width: 300px;
+        height: 400px;
+        border: 1px solid gray;
+        margin: auto;
+      }
+
+      #board {
+        margin: 20px auto;
+      }
+
+      .line {
+        margin: 8px 0;
+      }
+
+      .place {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        border: 1px solid #333;
+        margin: 2px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      #usedLetters {
+        margin-top: 20px;
+      }
+
+      .letterBox {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #666;
+        margin: 2px;
+        font-size: 14px;
+      }
+
+      #message {
+        margin-top: 15px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Wordle</h1>
+
+    <input type="text" id="enterGuess" maxlength="5" />
+    <input type="button" id="submitBtn" value="Submit Guess" />
+    <input type="button" id="restartBtn" value="Restart Game" />
+
+    <div id="message"></div>
+    <div id="boardframe">
+      <div id="board"></div>
+    </div>
+
+    <div id="usedLetters"></div>
+
+    <script>
+      // =========================
+      // DATA
+      // =========================
+      var answer = "PRIDE"; // hard-code first, API later
+      var guesses = [];
+      var guessesLeft = 6;
+      var usedLetters = {};
+      var gameOver = false;
+
+      // =========================
+      // ONLOAD
+      // =========================
+      window.onload = function () {
+        createBoard();
+        createUsedLettersBoard();
+
+        document.getElementById("submitBtn").onclick = handleSubmit;
+        document.getElementById("restartBtn").onclick = resetGame;
+
+        console.log("DEBUG answer:", answer);
+      };
+
+      // =========================
+      // FUNCTIONS
+      // =========================
+
+      //create the rows for the guess
+      //
+      function createBoard() {
+        var board = document.getElementById("board");
+        board.innerHTML = "";
+
+        for (var i = 0; i < 6; i++) {
+          board.innerHTML += "<div class='line' id='line" + i + "'></div>";
+        }
+      }
+      // create an alpha display to color later
+      function createUsedLettersBoard() {
+        var used = document.getElementById("usedLetters");
+        used.innerHTML = "";
+
+        var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        for (var i = 0; i < letters.length; i++) {
+          used.innerHTML +=
+            "<div class='letterBox' id='letter_" +
+            letters[i] +
+            "'>" +
+            letters[i] +
+            "</div>";
+        }
+      }
+
+      function getGuess() {
+        var guess = document.getElementById("enterGuess").value;
+        return guess.toUpperCase();
+      }
+
+      function validateGuess(guess) {
+        if (gameOver) {
+          showMessage("Game is over.");
+          return false;
+        }
+
+        if (guess.length !== 5) {
+          showMessage("Guess must be 5 letters.");
+          return false;
+        }
+
+        if (!/^[A-Z]+$/.test(guess)) {
+          showMessage("Guess must contain letters only.");
+          return false;
+        }
+
+        return true;
+      }
+
+      function compareGuess(guess, answer) {
+        var result = [];
+
+        for (var i = 0; i < 5; i++) {
+          if (guess[i] === answer[i]) {
+            result.push("green");
+          } else if (answer.includes(guess[i])) {
+            result.push("yellow");
+          } else {
+            result.push("gray");
+          }
+        }
+
+        return result;
+      }
+
+      function updateBoard(guess, result) {
+        var lineIndex = guesses.length;
+        var line = document.getElementById("line" + lineIndex);
+        line.innerHTML = "";
+
+        for (var i = 0; i < 5; i++) {
+          line.innerHTML +=
+            "<div class='place' style='background-color:" +
+            result[i] +
+            ";'>" +
+            guess[i] +
+            "</div>";
+        }
+      }
+
+      function updateUsedLetters(guess, result) {
+        for (var i = 0; i < 5; i++) {
+          var letter = guess[i];
+          var box = document.getElementById("letter_" + letter);
+
+          if (result[i] === "green") {
+            usedLetters[letter] = "green";
+          } else if (
+            result[i] === "yellow" &&
+            usedLetters[letter] !== "green"
+          ) {
+            usedLetters[letter] = "yellow";
+          } else if (
+            result[i] === "gray" &&
+            usedLetters[letter] !== "green" &&
+            usedLetters[letter] !== "yellow"
+          ) {
+            usedLetters[letter] = "gray";
+          }
+
+          box.style.backgroundColor = usedLetters[letter];
+        }
+      }
+
+      function handleSubmit() {
+        var guess = getGuess();
+
+        if (!validateGuess(guess)) {
+          return;
+        }
+
+        var result = compareGuess(guess, answer);
+
+        updateBoard(guess, result);
+        updateUsedLetters(guess, result);
+
+        guesses.push(guess);
+        guessesLeft--;
+
+        if (guess === answer) {
+          gameOver = true;
+          showMessage("You win!");
+          disableInput();
+          return;
+        }
+
+        if (guessesLeft === 0) {
+          gameOver = true;
+          showMessage("You lose. Answer was " + answer);
+          disableInput();
+          return;
+        }
+
+        showMessage("Guesses left: " + guessesLeft);
+        document.getElementById("enterGuess").value = "";
+      }
+
+      function disableInput() {
+        document.getElementById("enterGuess").disabled = true;
+        document.getElementById("submitBtn").disabled = true;
+      }
+
+      function enableInput() {
+        document.getElementById("enterGuess").disabled = false;
+        document.getElementById("submitBtn").disabled = false;
+      }
+
+      function showMessage(msg) {
+        document.getElementById("message").innerHTML = msg;
+      }
+
+      function resetGame() {
+        guesses = [];
+        guessesLeft = 6;
+        usedLetters = {};
+        gameOver = false;
+        answer = "PRIDE"; // later replace with getWord()
+
+        createBoard();
+        buildUsedLettersBoard();
+        enableInput();
+        showMessage("");
+        document.getElementById("enterGuess").value = "";
+
+        console.log("DEBUG answer:", answer);
+      }
+    </script>
+  </body>
+</html>

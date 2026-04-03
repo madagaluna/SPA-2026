@@ -8,131 +8,95 @@
   <body>
     <script>
       // --
-      // ---------------------------------------- VARIABLES THAT CHANGE STATE --- i.e: 
+      // ---------------------------------------- VARIABLES THAT CHANGE STATE --- i.e:
 
-      // --==================================--  Functions 
+      // --==================================--  Functions
 
       //3. redo 1 and 2, use a fx METHOD to create a class to store menu.  Create an array of 4 instances of the class (one for each food item 174
 
-      function MenuItem(name,price) // class is a blueprint|recipe  (notes for myself)
-      { 
-        this.name = name;  
-        this.price  = price;
+      function MenuItem(name, price) {
+        // class is a blueprint|recipe  (notes for myself)
+        this.name = name;
+        this.price = price;
 
         this.show = function () {
-            return this.name + " $" + this.price;  //using show method - takeaway: objects can have both properties and methods
-        };  //end show
+          return this.name + " $" + this.price; //using show method - takeaway: objects can have both properties and methods
+        }; //end show
       } // end function
-    
+
       //instance the class using NEW for each food iteam
       var menu = [
-      new MenuItem("hotdog", 4),
-      new MenuItem("fries", 3.5),
-      new MenuItem("soda", 1.5),
-      new MenuItem("sauerkraut", 1),
-    ];
-
+        new MenuItem("hotdog", 4),
+        new MenuItem("fries", 3.5),
+        new MenuItem("soda", 1.5),
+        new MenuItem("sauerkraut", 1),
+      ];
 
       // display the menu
 
       document.write("This uses a class:" + "<br>");
+      menu.forEach(function (item) {
+        document.write(item.show() + "<br>");
+      });
 
-      menu.forEach(function (item)
-      {
-        document.write (item.show() + "<br>")     
+      document.write("<hr>");
+      // ----------------------------------------- CREATE CLASS ANOTHER WAY
+      /*    function Menu2(items, price) {
+        this.menu2Items = [];
+        for (i = 0; i < items.length; i++) {
+          this.menu2Items.push(new MenuItems(item[i], price[i]));
+        }
+
+        this.displayMenu = function () {
+          this.menu2Items.forEach((mitems) => {
+            document.write(mitem.show());
+          }); // end display
+        };
       }
-  
-    );
 
-      document.write( "<hr>");
-
+      joesMenu = new Menu2(["hotdog", "fries", [5, 3]]);
+      joesMenu - displayMenu2(); */
 
       // ----------------------------------------- EVENTS
 
       // ---------------------------------------- ONLOAD
-       // 1.  create and display associative called menu of items (name, price) slide 155
-       menu = [];
-       menu["hotdog"] = 4.00 
-       menu["fries"] = 3.5 
-       menu["soda"] = 1.5 
-       menu["sauerkraut"] = 1.
+      // 1.  create and display associative called menu of items (name, price) slide 155
+      menu = [];
+      menu["hotdog"] = 4.0;
+      menu["fries"] = 3.5;
+      menu["soda"] = 1.5;
+      menu["sauerkraut"] = 1;
 
-       document.write("This uses an associative array:" + "<br>")
-       for (key in menu) document.write (key + " $" + menu[key] + "<br>") 
-       document.write("Associative arrays only count numeric indexes (tic-Tic-tac-toe), not strings (labels) so 'menu.length' = " + menu.length + "<br>")
-      document.write("Associative arrays are good for ordered list and if you care about position like in Tic-tac-toe "+ "<br>")
-       document.write("<hr>")
-
+      document.write("This uses an associative array:" + "<br>");
+      for (key in menu) document.write(key + " $" + menu[key] + "<br>");
+      document.write(
+        "Associative arrays only count numeric indexes (tic-Tic-tac-toe), not strings (labels) so 'menu.length' = " +
+          menu.length +
+          "<br>",
+      );
+      document.write(
+        "Associative arrays are good for ordered list and if you care about position like in Tic-tac-toe " +
+          "<br>",
+      );
+      document.write("<hr>");
 
       //** 2. redo part 1 using an object called menu to store and display the menu  items(name,price) slide 157
-        var menu = {
-            hotdog: 4.00,
-            fries: 3.5,
-            soda: 1.5,
-            sauerkraut: 1.
-            
-        }
-         document.write("This uses an object:" + "<br>")
-         for (key in menu) document.write (key + " $" + menu[key] + "<br>")
-         document.write("Objects uses 'Object.keys(menu).length' to find length = " + Object.keys(menu).length + "<br>")
-         document.write("Objects are good for things with labels like menus :)" + "<br>")
-
+      var menu = {
+        hotdog: 4.0,
+        fries: 3.5,
+        soda: 1.5,
+        sauerkraut: 1,
+      };
+      document.write("This uses an object:" + "<br>");
+      for (key in menu) document.write(key + " $" + menu[key] + "<br>");
+      document.write(
+        "Objects uses 'Object.keys(menu).length' to find length = " +
+          Object.keys(menu).length +
+          "<br>",
+      );
+      document.write(
+        "Objects are good for things with labels like menus :)" + "<br>",
+      );
     </script>
   </body>
 </html>
-
-<!--
-
-    ▪ The index to an array can be a string! ▪ This creates a key-value pair
-     flowers
-= []; flowers["daisy"] = 12 //daisy is the key, 12 is the value flowers["rose"]
-= 15 flowers["carnation"] = 8 document.write(flowers["rose"]) //displays 15 
-for (key in flowers) document.write(key + " $" + flowers[key] + " - ") 
-
-//Output:
-daisy $12 - rose $15 - carnation $8 *************************
-
-157 ▪ 
-
-▪ The index to an array can be a string!
-▪ This creates a key-value pair
-flowers = [];
-flowers["daisy"] = 12 //daisy is the key, 12 is the value
-flowers["rose"] = 15
-flowers["carnation"] = 8
-document.write(flowers["rose"]) //displays 15
-for (key in flowers)
-document.write(key + " $" + flowers[key] + " - ")
-//Output: daisy $12 - rose $15 - carnation $8
-
-
-7
-JS Objects
-▪ An object can be a set of name - value pairs:
-var flowers = {
-daisy: 12,
-rose: 15,
-carnation: 8
-}
-document.write (flowers['rose’]) //displays 15
-document.write (Object.keys(flowers))
-// displays: daisy,rose,carnation
-
-************ 174:
-function Rectangle(len, wid)
-{
-this.length = len;
-this.width = wid;
-this.area = area; //from the Function below
-}
-
-access the data members using the dot notation
-area = r.length * r.width;
-THIS CAN BE A FUNCTION
-function area()
-{
-	return this.length * this.width;
-}
-instance the class using new
-r = new Rectangle(3,4);
-rectArea = r.area(); 
