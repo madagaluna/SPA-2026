@@ -15,6 +15,7 @@
         height: 375px;
         border: 1px solid #333;
         margin: 60px auto;
+        background-color: #a0a9ee;
       }
 
       #enterGuess {
@@ -36,6 +37,7 @@
         border: 1px solid #333;
         margin-top: 5px;
         font-size: 14px;
+        background-color: #a0a9ee;
       }
 
       .place {
@@ -47,6 +49,7 @@
         margin: 2px;
         text-transform: uppercase;
         font-weight: bold;
+        border-radius: 5px; /* good old rounded corners */
       }
 
       .row {
@@ -67,14 +70,14 @@
 
     <!--  ++++++++++++++++++++++++++++++++++++++  html/CSS / dom / what you see on the page -->
 
-    <input type="text" id="enterGuess" maxlength="5" />
-    <input type="button" id="submitBtn" value="Guess" />
-    <input type="button" id="restartBtn" value="Restart Game" />
-    <div id="message"></div>
     <div id="frame">
       <div id="boardframe">
         <div id="board"></div>
       </div>
+      <div id="message"></div>
+      <input type="text" id="enterGuess" maxlength="5" />
+      <input type="button" id="submitBtn" value="Guess" />
+      <input type="button" id="restartBtn" value="Restart Game" />
       <div id="usedLetters"></div>
     </div>
 
@@ -85,6 +88,7 @@
         "SLATE",
         "APPLE",
         "BASIC",
+        "FREAK",
         "BRAVE",
         "BRICK",
         "BRING",
@@ -158,12 +162,17 @@
         return wordList[index];
       }
 
-      // creates 6 rows &   //  clear any existing content then loop like ttt
+      // clears the board then creates 6 rows with 5 empty boxes
       function createBoard() {
         var board = document.getElementById("board");
         board.innerHTML = "";
         for (i = 0; i < 6; i++) {
-          board.innerHTML += "<div class='row' id='row" + i + "'></div>";
+          board.innerHTML +=
+            "<div class='row' id='row" +
+            i +
+            "'>" +
+            "<div class='place'></div>".repeat(5) +
+            "</div>";
         }
       }
 
@@ -205,7 +214,7 @@
         return true;
       }
       function compareGuess(guess, answer) {
-        // array to store color results & find duplicates -string -> array (to modify and track) & check for correct pos and place and mark green or null
+        //  compare guess to answer, assign colors  (green correct spot, yellow wrong spot, grey not in word), handle duplicates
         var result = [];
         var answerArr = answer.split("");
         for (var i = 0; i < 5; i++) {
@@ -229,18 +238,14 @@
         return result;
       }
       // +++++++------------------ Update the board
-      // determine which row to fill based on # of guesses so far & clear row before inserting boxes & loop to create  and place letter in 5 boxes
+      // get current row, put letter and color in box
       function addRow(guess, result) {
         var rowIndex = guesses.length;
         var row = document.getElementById("row" + rowIndex);
-        row.innerHTML = "";
-        for (i = 0; i < 5; i++) {
-          row.innerHTML +=
-            "<div class='place' style='background-color:" +
-            result[i] +
-            ";'>" +
-            guess[i] +
-            "</div>";
+        var boxes = row.children;
+        for (var i = 0; i < 5; i++) {
+          boxes[i].innerText = guess[i];
+          boxes[i].style.backgroundColor = result[i];
         }
       }
       // +++++++++++++----+++-- apply the colors
@@ -270,7 +275,7 @@
         }
       }
 
-      // set up the API using fetch - not as scary as previous thought
+      // set up the API using fetch with respons.json to parse  the API response to an object
 
       function checkWord(word) {
         return fetch(
@@ -278,14 +283,17 @@
             word.toLowerCase(),
         )
           .then(function (response) {
-            return response.ok;
+            if (!response.ok) return false;
+            return response.json().then(function (data) {
+              return true;
+            });
           })
           .catch(function () {
             return false;
           });
       }
-
-      // validate the guess,
+      console.log(answer);
+      //get guess, validate, check if real word, compare to answer, update board and used letters, push guess, decrease guessesLeft, check win/loss, disable if over, send message
       function handleSubmit() {
         var guess = getGuess();
         if (!validateGuess(guess)) return;
@@ -293,9 +301,10 @@
         checkWord(guess).then(function (valid) {
           if (!valid) {
             showMessage("Enter a valid word.");
+            document.getElementById(enterGuess).value = ""; // not working
             return;
           }
-          //  compare it to the answer, update the board and used letters, push the guess to the array,// decrease the guessLeft & check win condition and guesses, disable, and send message
+
           var result = compareGuess(guess, answer);
           addRow(guess, result);
           addUsedLetters(guess, result);
@@ -352,11 +361,9 @@
         createUsedLettersBoard();
         enableInput();
         showMessage("");
-
+        console.log("answer is  " + answer);
         document.getElementById("enterGuess").value = "";
       }
     </script>
-
-    <script></script>
   </body>
 </html>
