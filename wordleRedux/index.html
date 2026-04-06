@@ -89,41 +89,52 @@
       var guesses =["might", "flood", "stray"];
       var guessesLeft = 6;
       var usedLetters = {};
-      var gameOver = false;
-
-      //  ++++++++++++++++++++++++++++++++++++++ onload
-//    window.onload = function () {
-
-        //REDUX as REACT 
+    //  var gameOver = false;
 
 
-      // ++++++++++++++++++++++++++++++++++++++ functions
-
-      // get the word
-  //    function getRandomWord() {
+ // ++++++++++++++++++++++++++++++++++++++ functions
 
 
- // clears the board then creates 6 rows with 5 empty boxes
-                                                     function createBoard() {
-                                                       var board = document.getElementById("board");
-                                                       board.innerHTML = "";
-                                                       for (i = 0; i < 6; i++) {
-                                                         board.innerHTML +=
-                                                           "<div class='row' id='row" +
-                                                           i +
-                                                           "'>" +
-                                                           "<div class='place'></div>".repeat(5) +
-                                                           "</div>";
-                                                       }
-                                                     }
+// GOAL: to return the react element 
+   function createBoard() {
+    guess.map(function(guess, idx){
+      var result = compareGuess(guess,answer); // returned array of colors for the guess
+      var boxes = [];
+      for (i = 0; i < 6; i++) {
+        boxes.push{  // guess[0], color result [0], etc
+        return React.createElement (
+            "div",
+            {className:  "place", 
+              style: { backgroundColor: result[i]}  // the color
+            },
+            guess[i]  // the letter
+          )
+        };
+      }
+    }
+  )
 
  //   function createUsedLettersBoard() {
             // RECUX
             //        }
-                                                    // get  the word from input box amd make uppercase
-                                        //             function getGuess() {
-                                      
-                                            //         }
+
+
+
+  //       function addRow(guess, result) {
+
+  // function makeCell(letter, color, key) {
+   //   return React.createElement(
+   //     "div",
+  //      {
+   //    
+
+  //       function addUsedLetters(guess, result) {
+
+                  // REDUX
+
+  //    }
+            
+        
 
 
 
@@ -153,42 +164,40 @@
         return result;
       }
 
+    function makeCell(letter, color, key) {
+      return React.createElement(
+        "div",
+        {
+          className: "place",
+          key: key,
+          style: { backgroundColor: color || "" }
+        },
+        letter || ""
+      );
+    }
 
-                                                          //  +++++++------------------ Update the board
-                                                            //       function addRow(guess, result) {
+    function makeRow(guess, result, key) {
+      var cells = [];
+      for (var i = 0; i < 5; i++) {
+        cells.push(makeCell(guess ? guess[i] : "", result ? result[i] : "", i));
+      }
 
-  // +++++++++++++----+++-- apply the colors
-    // get the letter box & change letter color depending on match &  apply backcolor in  the boxes
+      return React.createElement("div", { className: "row", key: key }, cells);
+    }
 
-  //       function addUsedLetters(guess, result) {
+    var rows = guesses.map(function(guess, idx) {
+      return makeRow(guess, compareGuess(guess, answer), idx);
+    });
 
-                  // REDUX
-
-  //    }
-
-                                                                                  // DELETE THESE FUNCTIONS  set up the API using fetch with respons.json to parse  the API response to an object
-
-                                                                                  //function checkWord(word) {
-                                                                                    //get guess, validate, check if real word, compare to answer, update board and used letters, push guess, decrease guessesLeft, check win/loss, disable if over, send message
-                                                                            //       function handleSubmit() {
-                                                                          
-                                                                                    //  disable input and enable input
-
-                                                                            //        function disableInput() {
-                                                                                  
-                                                                          //         function enableInput() {
-
-                                                                            //  function showMessage(msg) {
-
-                                                                                //function resetGame() {
-     
-
-                                                                                  // Set up a new Game and clear message and input box - play forever!
+    while (rows.length < 6) {
+      rows.push(makeRow("", null, rows.length));
+    }
 
 
-      var board = React.createElement("")
-      var root = ReactDom.createRoot(document.getElementById("wordle"));
-      root.render()
+
+    
+      var root = ReactDOM.createRoot(document.getElementById("wordle"));
+      root.render(board)
     </script>
   </body>
 </html>
