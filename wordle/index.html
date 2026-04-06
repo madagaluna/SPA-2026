@@ -301,7 +301,7 @@
         checkWord(guess).then(function (valid) {
           if (!valid) {
             showMessage("Enter a valid word.");
-            document.getElementById(enterGuess).value = ""; // not working
+            document.getElementById("enterGuess").value = ""; // working - needed quotes :/
             return;
           }
 
