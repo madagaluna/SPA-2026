@@ -97,22 +97,28 @@
 
 // GOAL: to return the react element 
    function createBoard() {
-    guess.map(function(guess, idx){
+    var rows = guesses.map(function(guess, idx){
       var result = compareGuess(guess,answer); // returned array of colors for the guess
       var boxes = [];
-      for (i = 0; i < 6; i++) {
-        boxes.push{  // guess[0], color result [0], etc
-        return React.createElement (
+      for (i = 0; i < 5; i++) {
+        boxes.push( // guess[0], color result [0], etc
+        React.createElement (
             "div",
             {className:  "place", 
               style: { backgroundColor: result[i]}  // the color
             },
             guess[i]  // the letter
           )
-        };
+          );
       }
-    }
-  )
+ return React.createElement("div", {className: "row", key: idx}), boxes;  // return entire row
+    });
+ 
+  return React.createElement("div", {id: "boardframe"}, rows);
+ }
+
+
+  
 
  //   function createUsedLettersBoard() {
             // RECUX
@@ -164,40 +170,40 @@
         return result;
       }
 
-    function makeCell(letter, color, key) {
-      return React.createElement(
-        "div",
-        {
-          className: "place",
-          key: key,
-          style: { backgroundColor: color || "" }
-        },
-        letter || ""
-      );
-    }
+                    // function makeCell(letter, color, key) {
+                    //   return React.createElement(
+                    //     "div",
+                    //     {
+                    //       className: "place",
+                    //       key: key,
+                    //       style: { backgroundColor: color || "" }
+                    //     },
+                    //     letter || ""
+                    //   );
+                    // }
 
-    function makeRow(guess, result, key) {
-      var cells = [];
-      for (var i = 0; i < 5; i++) {
-        cells.push(makeCell(guess ? guess[i] : "", result ? result[i] : "", i));
-      }
+                    // function makeRow(guess, result, key) {
+                    //   var cells = [];
+                    //   for (var i = 0; i < 5; i++) {
+                    //     cells.push(makeCell(guess ? guess[i] : "", result ? result[i] : "", i));
+                    //   }
 
-      return React.createElement("div", { className: "row", key: key }, cells);
-    }
+                    //   return React.createElement("div", { className: "row", key: key }, cells);
+                    // }
 
-    var rows = guesses.map(function(guess, idx) {
-      return makeRow(guess, compareGuess(guess, answer), idx);
-    });
+                    // var rows = guesses.map(function(guess, idx) {
+                    //   return makeRow(guess, compareGuess(guess, answer), idx);
+                    // });
 
-    while (rows.length < 6) {
-      rows.push(makeRow("", null, rows.length));
-    }
+                    // while (rows.length < 6) {
+                    //   rows.push(makeRow("", null, rows.length));
+                    // }
 
 
 
     
       var root = ReactDOM.createRoot(document.getElementById("wordle"));
-      root.render(board)
+      root.render(createBoard())
     </script>
   </body>
 </html>
