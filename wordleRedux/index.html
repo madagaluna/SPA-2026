@@ -136,9 +136,9 @@
 
         // then do a second loop to check for yellow and grey & skip anything green & remove used letter from matching again
           for (var i = 0; i < 5; i++) {
-          if (result[i]) continue;
+          if (result[i]) continue; //has a value - green - so skip the loop
           var index = answerArr.indexOf(guess[i]);
-          if (index !== -1) {
+          if (index !== -1) {             // double negative means it exists
             result[i] = "yellow";
             answerArr[index] = null; //
           } else {
@@ -149,21 +149,24 @@
       }
 
 
-   //  +++++++------------------ Update the board / apply guesses to board
+   //  +++++++------------------ Update the board apply guesses to board
       // goes row by row inserting letter and color to boxes using r & b as indexes for row and box
 
-  
-    function updateBoard(board) {
-      for (var i = 0; i <= guesses.length; i++) {
-        var guess = guesses[i];
-        var result = compareGuess(guess, answer);
+    function updateBoard(board)  {
+      for (var r = 0; r <= guesses.length; r++) { //all the guesses cuz they're preloaded
+       var guess = guesses[r];// the word in this row
+      var result = compareGuess(guess, answer);// receives the returned variable from compareGuess / different scope
 
-        for (var i = 0; i < 5; i++) {
-          board[i][i].letter = guess[i];
-          board[i][i].color = result[i];
+       for (var b = 0; b < 5;  b++) {
+        board[r][b].letter = guess[r]; // update the empty box with the letter using index
+          board[r][b].color  = result[r];// update the empty box with the color using index
         }
       }
     }
+     
+
+
+
 
 
     
