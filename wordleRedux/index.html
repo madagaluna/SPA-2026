@@ -100,10 +100,10 @@
       var board = [];
       for (var r = 0; r < 6; r++) { //rows that make the board
         var row = [];
-        for (var b = 0; b <= 5; b++) { //boxes that fill the fow
+        for (var b = 0; b < 5; b++) { //boxes that fill the row
           row.push(new Box("", ""));
         }
-        board.push(board);
+        board.push(row);
       }
       return board;
     };
@@ -149,17 +149,22 @@
       }
 
 
-                                                          //  +++++++------------------ Update the board
-  //       function addRow(guess, result) {
+   //  +++++++------------------ Update the board / apply guesses to board
+      // goes row by row inserting letter and color to boxes using r & b as indexes for row and box
 
-  // +++++++++++++----+++-- apply the colors
-    // get the letter box & change letter color depending on match &  apply backcolor in  the boxes
+  
+    function updateBoard(board) {
+      for (var i = 0; i <= guesses.length; i++) {
+        var guess = guesses[i];
+        var result = compareGuess(guess, answer);
 
-  //       function addUsedLetters(guess, result) {
+        for (var i = 0; i < 5; i++) {
+          board[i][i].letter = guess[i];
+          board[i][i].color = result[i];
+        }
+      }
+    }
 
-                  // REDUX
-
-  //    }
 
     
       var root = ReactDOM.createRoot(document.getElementById("wordle"));
