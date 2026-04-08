@@ -87,58 +87,36 @@
     
       var answer = "moody"; // wordle genius!
       var guesses =["might", "flood", "stray"];
-      var guessesLeft = 6;
-      var usedLetters = {};
-    //  var gameOver = false;
+
 
 
  // ++++++++++++++++++++++++++++++++++++++ functions
 
 
-// GOAL: to return the react element 
-   function createBoard() {
-    var rows = guesses.map(function(guess, idx){
-      var result = compareGuess(guess,answer); // returned array of colors for the guess
-      var boxes = [];
-      for (i = 0; i < 5; i++) {
-        boxes.push( // guess[0], color result [0], etc
-        React.createElement (
-            "div",
-            {className:  "place", 
-              style: { backgroundColor: result[i]}  // the color
-            },
-            guess[i]  // the letter
-          )
-          );
+      // ++++++++++++++++++++++++++++++++++++++ create board
+      //  6 rows of 5 empty box object - use nested arrays to make the board
+
+    function createEmptyBoard() {
+      var board = [];
+      for (var r = 0; r < 6; r++) { //rows that make the board
+        var row = [];
+        for (var b = 0; b <= 5; b++) { //boxes that fill the fow
+          row.push(new Box("", ""));
+        }
+        board.push(board);
       }
- return React.createElement("div", {className: "row", key: idx}), boxes;  // return entire row
-    });
- 
-  return React.createElement("div", {id: "boardframe"}, rows);
- }
-
-
-  
+      return board;
+    };
+//console.log(row)
+    function Box(letter, color) {
+      this.letter = letter;
+      this.color = color;
+    }
+//console.log(Box)
 
  //   function createUsedLettersBoard() {
             // RECUX
             //        }
-
-
-
-  //       function addRow(guess, result) {
-
-  // function makeCell(letter, color, key) {
-   //   return React.createElement(
-   //     "div",
-  //      {
-   //    
-
-  //       function addUsedLetters(guess, result) {
-
-                  // REDUX
-
-  //    }
             
         
 
@@ -170,40 +148,22 @@
         return result;
       }
 
-                    // function makeCell(letter, color, key) {
-                    //   return React.createElement(
-                    //     "div",
-                    //     {
-                    //       className: "place",
-                    //       key: key,
-                    //       style: { backgroundColor: color || "" }
-                    //     },
-                    //     letter || ""
-                    //   );
-                    // }
 
-                    // function makeRow(guess, result, key) {
-                    //   var cells = [];
-                    //   for (var i = 0; i < 5; i++) {
-                    //     cells.push(makeCell(guess ? guess[i] : "", result ? result[i] : "", i));
-                    //   }
+                                                          //  +++++++------------------ Update the board
+  //       function addRow(guess, result) {
 
-                    //   return React.createElement("div", { className: "row", key: key }, cells);
-                    // }
+  // +++++++++++++----+++-- apply the colors
+    // get the letter box & change letter color depending on match &  apply backcolor in  the boxes
 
-                    // var rows = guesses.map(function(guess, idx) {
-                    //   return makeRow(guess, compareGuess(guess, answer), idx);
-                    // });
+  //       function addUsedLetters(guess, result) {
 
-                    // while (rows.length < 6) {
-                    //   rows.push(makeRow("", null, rows.length));
-                    // }
+                  // REDUX
 
-
+  //    }
 
     
       var root = ReactDOM.createRoot(document.getElementById("wordle"));
-      root.render(createBoard())
+      root.render(board)
     </script>
   </body>
 </html>
