@@ -11,6 +11,7 @@
       crossorigin
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
+
     <style>
       body {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -90,7 +91,7 @@
       // ++++++++++++++++++++++++++++++++++++++ functions
 
       // ++++++++++++++++++++++++++++++++++++++ create board
-      //  6 rows of 5 empty box object - use nested arrays to make the board
+      //  6 rows of 5 empty box object - use nested arrays to make the board - array of rows array of object boxes
 
       function createEmptyBoard() {
         var board = [];
@@ -98,7 +99,7 @@
           //rows that make the board
           var row = [];
           for (var b = 0; b < 5; b++) {
-            //boxes that fill the row
+            //empty boxes that fill the row
             row.push(new Box("", ""));
           }
           board.push(row);
@@ -117,11 +118,11 @@
       function compareGuess(guess, answer) {
         //  compare guess to answer, assign colors  (green correct spot, yellow wrong spot, grey not in word), handle duplicates
         var result = [];
-        var answerArr = answer.split("");
+        var answerArr = answer.split(""); // have to split the answer cuz it will be changed/modified
         for (var i = 0; i < 5; i++) {
           if (guess[i] === answerArr[i]) {
             result[i] = "green";
-            answerArr[i] = null;
+            answerArr[i] = null; // don't use again it's continue in the second loop and leaves
           }
         }
 
@@ -132,7 +133,7 @@
           if (index !== -1) {
             // double negative means it exists
             result[i] = "yellow";
-            answerArr[index] = null; //
+            answerArr[index] = null; // hits continue and leaves
           } else {
             result[i] = "gray";
           }
@@ -155,41 +156,76 @@
           }
         }
       }
+      // used letters using an object for letter : "color"
+      function createUsedLetters(guesses, answer) {
+        var used = {};
 
-      // // var usedLetters = createUsedLettersBoard(guesses, answer);
-      // // {
-      //    var used = {};
-      // get result = compareGuess(guess, answer)
-      // //   //loop guesses
-      // //   // result  = compareGuess( ...)
-      // //   //loop letters
-      // //   //update used(letters)
-      // //   return used;
+        for (var r = 0; r < guesses.length; r++) {
+          var guess = guesses[r];
+          var result = compareGuess(guess, answer); //["color","color","color","color","color"] of guess
 
-      // //   Console.log(used);
+          for (var b = 0; b < 5; b++) {
+            // loops through each leter
+            var letter = guess[b];
+            var color = result[b];
+
+            if (color === "green") {
+              // creates a hierachy of applied color
+              used[letter] = "green";
+            } else if (color === "yellow") {
+              if (used[letter] !== "green") {
+                used[letter] = "yellow";
+              }
+            } else {
+              if (!used[letter]) {
+                used[letter] = "grey";
+              }
+            }
+          }
+        }
+
+        return used; // returns the object with the letter and color to react to be used for the display
+      }
+
       // // }
       // //
-      // //    function createUsedLettersBoard() {
+      // //    function createUsedLetters(Board()) {
       // //    // create the alphabet board, wipe old,use a string for the letters looping through and create one box per letter
       // //    var used = {};
       // //    used.innerHTML = "";
       // //    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      // //                      // for (i = 0; i < letters.length; i++) {
+      // //                      //
       // //                      //   used.innerHTML +=
       // //                      //     "<div class='letterBox' id='letter" +
       // //                      //     letters[i] +
       // //                      //     "'>" +
       // //                      //     letters[i] +
       // //                      //     "</div>";
-      // // //   }    }
+      //    }   }
+      // display the colored used letters
+      function displayUsedLetters(used) {
+        var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var boxes = letters.split("").map(function (letter, i) {
+          // split the string and map the letter and index into boxes
+          var color = used[letter.toLowerCase()]; // looks up color by index of the object.  * hours spent here.  ALays the stupid stuff!
 
-      //    function displayUsedLetters(used)
-      //    var usedLetters =
+          return React.createElement(
+            "div",
+            {
+              className: "letterBox",
+              key: i,
+              style: { backgroundColor: color },
+            },
+            letter,
+          );
+        });
+        return React.createElement("div", null, boxes);
+      }
+
       // //          //   function displayBoard() {
       // //          //   var rows = board.map(function (row, rIdx) {
       // //          //     // loops through each row
-      // //          //     var boxes = row.map(function (box, bIdx) {
-      // //          //       //and box
+
       // //          //       return React.createElement(
       // //          //         "div",
       // //          //         {
@@ -213,7 +249,7 @@
       // }
       // ---------------------- Display  board
 
-      // // GOAL: to return the react element/ makes UI
+      // // GOAL: to return the react element/ makes UI - the nexted map == nested arrays in the board
       function displayBoard() {
         var rows = board.map(function (row, rIdx) {
           // loops through each row and key
@@ -241,11 +277,20 @@
       }
 
       //---------------------------- Feed React
+
       var board = createEmptyBoard();
       updateBoard(board);
 
+      var usedLetters = createUsedLetters(guesses, answer);
+      console.log(usedLetters);
+
+      var usedRoot = ReactDOM.createRoot(
+        document.getElementById("usedLetters"),
+      );
+      usedRoot.render(displayUsedLetters(usedLetters)); // passes usedLetters into fx displayUL
+
       var root = ReactDOM.createRoot(document.getElementById("wordle"));
-      root.render(displayBoard());
+      root.render(displayBoard()); // don't need to fill cuz it's the global
     </script>
   </body>
 </html>
