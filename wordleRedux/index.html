@@ -62,20 +62,22 @@
   <body>
     <h1>Wordle</h1>
 
-    <!--  ++++++++++++++++++++++++++++++++++++++  html/CSS / dom / what you see on the page -->
+    <!--  ++++++++++++++++++++++++++++++++++++ HTML / placeholders for what you see on the page -->
 
     <div id="wordle"></div>
     <div id="usedLetters"></div>
     <script>
-      // ++++++++++++++++++++++++++++++++++++++ data that drives changes
+      // ++++++++++++++++++++++++++++++++++++++ DATA
+
       // get random word from list for answer & previous guesses, can use push, order matters = array * set guess limit & make an object  each letter-> place
 
-      var answer = "moody"; // wordle genius!
+      var answer = "moody";
       var guesses = ["might", "flood", "stray"];
 
-      // ++++++++++++++++++++++++++++++++++++++ functions
+      // ++++++++++++++++++++++++++++++++++++++ FUNCTIONS
 
-      // ++++++++++++++++++++++++++++++++++++++ create board
+      // ++++++++++++++++++++++++++++++++++ CREATE BOARD
+
       //  6 rows of 5 empty box object - use nested arrays to make the board - array of rows array of object boxes
 
       function createEmptyBoard() {
@@ -96,9 +98,11 @@
       }
       console.log(new Box("", ""));
 
-      //REDUX COMPARE GUESS
+      //++++++++++++++++ COMPARE GUESS
+
+      //  compare guess to answer, assign colors  (green correct spot, yellow wrong spot, grey not in word), handle duplicates,  takeaways: have to split() answer cuz it will be changed/modified,  mark used as null so it won't be matched again
+
       function compareGuess(guess, answer) {
-        //  compare guess to answer, assign colors  (green correct spot, yellow wrong spot, grey not in word), handle duplicates,  takeaways: have to split() answer cuz it will be changed/modified,  mark used as null so it won't be matched again
         var result = [];
         var answerArr = answer.split("");
         for (var i = 0; i < 5; i++) {
@@ -122,7 +126,8 @@
         return result;
       }
 
-      //  +++++++------------------ Update the board apply guesses to board
+      //  +++++++------------ UPDATE THE BOARD
+
       // goes row by row inserting letter and color to boxes using r & b as indexes for row and box //all the guesses cuz they're preloaded  gets the returned array of colors for  guess  update the empty box with the letter using index and  update the empty box with the color using index
 
       function updateBoard(board) {
@@ -136,6 +141,9 @@
           }
         }
       }
+
+      //  +++++++------------ CREATE USED LETTERS
+
       // used letters using an object for letter : "color"
       // ["color","color","color","color","color"] of guess , loops through each letter  = creates a hierachy of applied color // returns the object with the letter and color to react to be used for the display
       function createUsedLetters(guesses, answer) {
@@ -166,25 +174,9 @@
         return used;
       }
 
-      // display the colored used letters  // // split alphabet string into letters, map each letter into a React box, and look up that letter's color in the used object * hours spent here.  Always the stupid stuff ... well, and everything else!
-      function displayUsedLetters(used) {
-        var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        var boxes = letters.split("").map(function (letter, i) {
-          var color = used[letter.toLowerCase()];
-          return React.createElement(
-            "div",
-            {
-              className: "letterBox",
-              key: i,
-              style: { backgroundColor: color },
-            },
-            letter,
-          );
-        });
-        return React.createElement("div", null, boxes);
-      }
+      // ---------------------- VIRTUAL DOM
 
-      // ---------------------- Display  board
+      // ---------------------- DISPLAY BOARD
 
       // // GOAL: // turn board data into React UI. outer map loops through rows,inner map loops through boxes in each row and create one box object div per box object, then wrap boxes in a row div
 
@@ -210,6 +202,26 @@
         });
 
         return React.createElement("div", { id: "boardframe" }, rows); //boardframe gives the whole frame, thought it should just be board
+      }
+
+      //  +++++++------------ DISPLAY USED LETTERS
+
+      // display the colored used letters  // // split alphabet string into letters, map each letter into a React box, and look up that letter's color in the used object * hours spent here.  Always the stupid stuff ... well, and everything else!
+      function displayUsedLetters(used) {
+        var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var boxes = letters.split("").map(function (letter, i) {
+          var color = used[letter.toLowerCase()];
+          return React.createElement(
+            "div",
+            {
+              className: "letterBox",
+              key: i,
+              style: { backgroundColor: color },
+            },
+            letter,
+          );
+        });
+        return React.createElement("div", null, boxes);
       }
 
       //---------------------------- Feed React
