@@ -69,8 +69,6 @@
     <script>
       // ++++++++++++++++++++++++++++++++++++++ DATA
 
-      // get random word from list for answer & previous guesses, can use push, order matters = array * set guess limit & make an object  each letter-> place
-
       var answer = "moody";
       var guesses = ["might", "flood", "stray"];
 
@@ -92,6 +90,7 @@
         return board;
       }
       //create an object that has the letter and color
+
       function Box(letter, color) {
         this.letter = letter;
         this.color = color;
