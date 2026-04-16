@@ -67,157 +67,155 @@
     <!--  ++++++++++++++++++++++++++++++++++++ HTML / placeholders for what you see on the page -->
 
     <div id="root"></div>
-    ;
+
     <script type="text/babel">
-      // <div id="usedLetters"></div> -->
+      // ++++++++++++++++++++++++++++++++++++++ DATA
 
-      //       // ++++++++++++++++++++++++++++++++++++++ DATA
+      var answer = "moody";
+      var guesses = ["might", "flood", "stray"];
 
-      //       var answer = "moody";
-      //       var guesses = ["might", "flood", "stray"];
+      // ++++++++++++++++++++++++++++++++++++++ FUNCTIONS
 
-      //       // ++++++++++++++++++++++++++++++++++++++ FUNCTIONS
+      // ++++++++++++++++++++++++++++++++++++++ Wrap divs/roots in one main jsx component
 
-      //       // ++++++++++++++++++++++++++++++++++++++ Wrap divs/roots in one main react fx
-
-      //       function displayAll() {
-      //         return React.createElement(
-      //           "div",
-      //           null,
-      //           displayBoard(),
-      //           displayUsedLetters(usedLetters),
-      //         );
-      //       }
-
-      //       // ++++++++++++++++++++++++++++++++++ CREATE BOARD
-
-      //       //  6 rows of 5 empty box object - use nested arrays to make the board - array of rows array of object boxes
-
-      //       function createEmptyBoard() {
-      //         var board = [];
-      //         for (var r = 0; r < 6; r++) {
-      //           var row = [];
-      //           for (var b = 0; b < 5; b++) {
-      //             row.push(new Box("", ""));
-      //           }
-      //           board.push(row);
-      //         }
-      //         return board;
-      //       }
-      //       //create an object that has the letter and color
-
-      //       function Box(letter, color) {
-      //         this.letter = letter;
-      //         this.color = color;
-      //       }
-      //       console.log(new Box("", ""));
-
-      //       //++++++++++++++++ COMPARE GUESS
-
-      //       //  compare guess to answer, assign colors  (green correct spot, yellow wrong spot, grey not in word), handle duplicates,  takeaways: have to split() answer cuz it will be changed/modified,  mark used as null so it won't be matched again
-
-      //       function compareGuess(guess, answer) {
-      //         var result = [];
-      //         var answerArr = answer.split("");
-      //         for (var i = 0; i < 5; i++) {
-      //           if (guess[i] === answerArr[i]) {
-      //             result[i] = "green";
-      //             answerArr[i] = null;
-      //           }
-      //         }
-
-      //         // then do a second loop to check for yellow and grey & skip anything green & mark used letter
-      //         for (var i = 0; i < 5; i++) {
-      //           if (result[i]) continue;
-      //           var index = answerArr.indexOf(guess[i]);
-      //           if (index !== -1) {
-      //             result[i] = "yellow";
-      //             answerArr[index] = null;
-      //           } else {
-      //             result[i] = "grey";
-      //           }
-      //         }
-      //         return result;
-      //       }
-
-      //       //  +++++++------------ UPDATE THE BOARD
-
-      //       // goes row by row inserting letter and color to boxes using r & b as indexes for row and box //all the guesses cuz they're preloaded  gets the returned array of colors for  guess  update the empty box with the letter using index and  update the empty box with the color using index
-
-      //       function updateBoard(board) {
-      //         for (var r = 0; r < guesses.length; r++) {
-      //           var guess = guesses[r];
-      //           var result = compareGuess(guess, answer);
-
-      //           for (var b = 0; b < 5; b++) {
-      //             board[r][b].letter = guess[b];
-      //             board[r][b].color = result[b];
-      //           }
-      //         }
-      //       }
-
-      //       //  +++++++------------ CREATE USED LETTERS
-
-      //       // used letters using an object for letter : "color"
-      //       // ["color","color","color","color","color"] of guess , loops through each letter  = creates a hierachy of applied color // returns the object with the letter and color to react to be used for the display
-      //       function createUsedLetters(guesses, answer) {
-      //         var used = {};
-
-      //         for (var r = 0; r < guesses.length; r++) {
-      //           var guess = guesses[r];
-      //           var result = compareGuess(guess, answer);
-
-      //           for (var b = 0; b < 5; b++) {
-      //             var letter = guess[b];
-      //             var color = result[b];
-
-      //             if (color === "green") {
-      //               used[letter] = "green";
-      //             } else if (color === "yellow") {
-      //               if (used[letter] !== "green") {
-      //                 used[letter] = "yellow";
-      //               }
-      //             } else {
-      //               if (!used[letter]) {
-      //                 used[letter] = "grey";
-      //               }
-      //             }
-      //           }
-      //         }
-
-      //         return used;
-      //       }
-
-      //       // ---------------------- VIRTUAL DOM
-
-      //       // ---------------------- DISPLAY BOARD
-
-      function Wordle() {
-        return <div id="boardframe">Board here</div>;
+      function DisplayAll() {
+        return (
+          <div>
+            <Board />
+          </div>
+        );
       }
+
+      // ++++++++++++++++++++++++++++++++++ CREATE BOARD
+
+      //  6 rows of 5 empty box object - use nested arrays to make the board - array of rows array of object boxes
+
+      function createEmptyBoard() {
+        var board = [];
+        for (var r = 0; r < 6; r++) {
+          var row = [];
+          for (var b = 0; b < 5; b++) {
+            row.push(new Box("", ""));
+          }
+          board.push(row);
+        }
+        return board;
+      }
+      //create an object that has the letter and color
+
+      function Box(letter, color) {
+        this.letter = letter;
+        this.color = color;
+      }
+      console.log(new Box("", ""));
+
+      //++++++++++++++++ COMPARE GUESS
+
+      //  compare guess to answer, assign colors  (green correct spot, yellow wrong spot, grey not in word), handle duplicates,  takeaways: have to split() answer cuz it will be changed/modified,  mark used as null so it won't be matched again
+
+      function compareGuess(guess, answer) {
+        var result = [];
+        var answerArr = answer.split("");
+        for (var i = 0; i < 5; i++) {
+          if (guess[i] === answerArr[i]) {
+            result[i] = "green";
+            answerArr[i] = null;
+          }
+        }
+
+        // then do a second loop to check for yellow and grey & skip anything green & mark used letter
+        for (var i = 0; i < 5; i++) {
+          if (result[i]) continue;
+          var index = answerArr.indexOf(guess[i]);
+          if (index !== -1) {
+            result[i] = "yellow";
+            answerArr[index] = null;
+          } else {
+            result[i] = "grey";
+          }
+        }
+        return result;
+      }
+
+      //  +++++++------------ UPDATE THE BOARD
+
+      // goes row by row inserting letter and color to boxes using r & b as indexes for row and box //all the guesses cuz they're preloaded  gets the returned array of colors for  guess  update the empty box with the letter using index and  update the empty box with the color using index
+
+      function updateBoard(board) {
+        for (var r = 0; r < guesses.length; r++) {
+          var guess = guesses[r];
+          var result = compareGuess(guess, answer);
+
+          for (var b = 0; b < 5; b++) {
+            board[r][b].letter = guess[b];
+            board[r][b].color = result[b];
+          }
+        }
+      }
+
+      //  +++++++------------ CREATE USED LETTERS
+
+      // used letters using an object for letter : "color"
+      // ["color","color","color","color","color"] of guess , loops through each letter  = creates a hierachy of applied color // returns the object with the letter and color to react to be used for the display
+      function createUsedLetters(guesses, answer) {
+        var used = {};
+
+        for (var r = 0; r < guesses.length; r++) {
+          var guess = guesses[r];
+          var result = compareGuess(guess, answer);
+
+          for (var b = 0; b < 5; b++) {
+            var letter = guess[b];
+            var color = result[b];
+
+            if (color === "green") {
+              used[letter] = "green";
+            } else if (color === "yellow") {
+              if (used[letter] !== "green") {
+                used[letter] = "yellow";
+              }
+            } else {
+              if (!used[letter]) {
+                used[letter] = "grey";
+              }
+            }
+          }
+        }
+
+        return used;
+      }
+
+      // ---------------------- VIRTUAL DOM
+
+      // ---------------------- DISPLAY BOARD
+
+      // function Wordle() {
+      //   return <div id="boardframe">Board here</div>;
+      // }
 
       //       // // GOAL: // turn board data into React UI. outer map loops through rows,inner map loops through boxes in each row and create one box object div per box object, then wrap boxes in a row div
       //       //capitalize the fx name, through a return (div id) at the beginning of the fx and put variables in {}
-      //       function DisplayBoard() {
-      //         return
-      //         <div id="boardframe">
 
-      //         { board.map((row, rIdx) => (
-      //           <div className = "row" key = {rIdx}>
-      //             {row.map((box, bId))=>(
+      var board = createEmptyBoard();
+      updateBoard(board);
+      var usedLetters = createUsedLetters(guesses, answer);
+      function Board() {
+        return (
+          <div id="boardframe">
+            {board.map((row, rIdx) => (
+              <div className="row" key={rIdx}>
+                {row.map((box, bIdx) => (
+                  <div className="place" key={bIdx}>
+                    {box.letter}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        );
+      }
 
-      //               <div
-      //                 className="place"
-      //                 key: {bIdx}
-      //                 style: {{ backgroundColor: box.color}}
-      //               >
-      //               {box.letter}
-      //               </div>
-      //             ))}
-      //            </div>
-      //           ))}
-      //         </div>
-      //  //var rows = board.map(function (row, rIdx) {
+      // var rows = board.map(function (row, rIdx) {
 
       //         //var boxes = row.map(function (box, bIdx) {
       //          //   return React.createElement(
@@ -253,8 +251,12 @@
 
       //---------------------------- Render
 
+      // function Wordle() {
+      //   return <Board />;
+      // }
+
       const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<Wordle />);
+      root.render(<DisplayAll />);
 
       // var board = createEmptyBoard();
       // updateBoard(board);
