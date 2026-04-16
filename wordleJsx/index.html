@@ -76,11 +76,12 @@
 
       // ++++++++++++++++++++++++++++++++++++++ FUNCTIONS
 
-      // ++++++++++++++++++++++++++++++++++++++ Wrap divs/roots in one main jsx component
+      // ++++++++++++++++++++++++++++++++++++++ Wrap components in a component in one main jsx component
 
       function DisplayAll() {
         return (
           <div>
+            <UsedLetters />
             <Board />
           </div>
         );
@@ -195,6 +196,7 @@
 
       //       // // GOAL: // turn board data into React UI. outer map loops through rows,inner map loops through boxes in each row and create one box object div per box object, then wrap boxes in a row div
       //       //capitalize the fx name, through a return (div id) at the beginning of the fx and put variables in {}
+      // jsx specific: replace the reactElement with JSX- use return, use {} for map and values / that is, JS methods and variables , other syntax changes like to div, double braces for style cuz it's an object, Board is now a component
 
       var board = createEmptyBoard();
       updateBoard(board);
@@ -205,7 +207,11 @@
             {board.map((row, rIdx) => (
               <div className="row" key={rIdx}>
                 {row.map((box, bIdx) => (
-                  <div className="place" key={bIdx}>
+                  <div
+                    className="place"
+                    key={bIdx}
+                    style={{ backgroundColor: box.color }} //add color back in
+                  >
                     {box.letter}
                   </div>
                 ))}
@@ -215,21 +221,29 @@
         );
       }
 
-      // var rows = board.map(function (row, rIdx) {
-
-      //         //var boxes = row.map(function (box, bIdx) {
-      //          //   return React.createElement(
-      //       //     return React.createElement(
-      //       //       "div",
-      //       //       { className: "row", key: rIdx },
-      //       //       boxes,
-      //       //     );
-      //       //   });
-
-      //       //   return React.createElement("div", { id: "boardframe" }, rows); //boardframe gives the whole frame, thought it should just be board
-      //       // }
-
       //       //  +++++++------------ DISPLAY USED LETTERS
+
+      // display the colored used letters  // // split alphabet string into letters, map each letter into a React box, and look up that letter's color in the used object * hours spent here.  Always the stupid stuff ... well, and everything else!
+      // jsx specific: replace the reactElement with JSX, use return, use {} for map and values / JS methods and variables , double braces stylecuz it's an object,  USEDLetters is now a COMPONENT
+      function UsedLetters() {
+        var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+        return (
+          <div id="usedLettersBoard">
+            {letters.map((letter, i) => (
+              <div
+                className="letterBox"
+                key={i}
+                style={{ backgroundColor: usedLetters[letter.toLowerCase()] }}
+              >
+                {letter}
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      // }
 
       //       // display the colored used letters  // // split alphabet string into letters, map each letter into a React box, and look up that letter's color in the used object * hours spent here.  Always the stupid stuff ... well, and everything else!
       //       function displayUsedLetters(used) {
