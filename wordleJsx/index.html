@@ -190,10 +190,6 @@
 
       // ---------------------- DISPLAY BOARD
 
-      // function Wordle() {
-      //   return <div id="boardframe">Board here</div>;
-      // }
-
       //       // // GOAL: // turn board data into React UI. outer map loops through rows,inner map loops through boxes in each row and create one box object div per box object, then wrap boxes in a row div
       //       //capitalize the fx name, through a return (div id) at the beginning of the fx and put variables in {}
       // jsx specific: replace the reactElement with JSX- use return, use {} for map and values / that is, JS methods and variables , other syntax changes like to div, double braces for style cuz it's an object, Board is now a component
@@ -243,43 +239,10 @@
         );
       }
 
-      // }
-
-      //       // display the colored used letters  // // split alphabet string into letters, map each letter into a React box, and look up that letter's color in the used object * hours spent here.  Always the stupid stuff ... well, and everything else!
-      //       function displayUsedLetters(used) {
-      //         var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      //         var boxes = letters.split("").map(function (letter, i) {
-      //           var color = used[letter.toLowerCase()];
-      //           return React.createElement(
-      //             "div",
-      //             {
-      //               className: "letterBox",
-      //               key: i,
-      //               style: { backgroundColor: color },
-      //             },
-      //             letter,
-      //           );
-      //         });
-      //         return React.createElement("div", null, boxes);
-      // }
-
       //---------------------------- Render
-
-      // function Wordle() {
-      //   return <Board />;
-      // }
 
       const root = ReactDOM.createRoot(document.getElementById("root"));
       root.render(<DisplayAll />);
-
-      // var board = createEmptyBoard();
-      // updateBoard(board);
-
-      // var usedLetters = createUsedLetters(guesses, answer);
-      // console.log(usedLetters);
-
-      // var root = ReactDOM.createRoot(document.getElementById("root"));
-      // root.render(displayAll()); // don't need to fill cuz it's the global
     </script>
   </body>
 </html>
