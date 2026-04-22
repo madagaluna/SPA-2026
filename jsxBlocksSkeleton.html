@@ -4,10 +4,12 @@
     <meta charset="utf-8" />
     <title>Component Demo</title>
     <style type="text/css">
-      .block {
+      .nums {
         border: 1px solid #34b078;
         padding: 10px;
-        max-width: 150px;
+        width: 80px;
+        height: 80px;
+        border: 1px solid black;
         text-align: center;
         display: inline-block;
       }
@@ -20,8 +22,12 @@
       .mustard {
         background-color: rgb(181, 161, 7);
       }
-      .black {
+      .red {
         background-color: red;
+      }
+
+      .blue {
+        background-color: blue;
       }
     </style>
     <script
@@ -42,7 +48,7 @@
     <script type="text/babel">
       //-------------------------------DATA
 
-      [
+      const nums = [
         { num: 7, color: "black" },
         { num: 8, color: "blue" },
         { num: 9, color: "red" },
@@ -56,18 +62,30 @@
 
       //-------------------------------component
 
-       function Employee2({ userID, children }) {
-        var pick = () => alert("You picked: " + children); //event handler
+      function Block({ num, color }) {
+        const handleClick = () => alert(num);
 
         return (
-          <div className="emp">
-            <p>{children}</p>
-            <p>ID: {userID}</p>
-            <button onClick={pick}>Pick {children} </button>
+          <div className={"block" + color} onClick={handleClick}>
+            {num}
           </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div>
+            {nums.map((b, idx) => (
+              <Block key={idx} num={b.num} color={b.color} />
+            ))}
+          </div>
+        );
+      }
+
+      //-------------------------------render
 
       const myroot = ReactDOM.createRoot(document.getElementById("root"));
-      myroot.render(group);
+      myroot.render(<App />);
     </script>
   </body>
 </html>
